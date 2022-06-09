@@ -285,6 +285,10 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: m_ImprovedPatchFriction
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: m_SolverType
     value: 0
     objectReference: {fileID: 0}

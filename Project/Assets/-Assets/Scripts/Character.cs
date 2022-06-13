@@ -5,31 +5,21 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [SerializeField] float m_MoveSpeed = 3;
-    [SerializeField] float m_TurnSpeed = 360;
-
-    Rigidbody m_Rigidbody;
-    Animator m_Animator;
-    CapsuleCollider m_Capsule;
-
-    float h, v;
-
-    private void Start()
-    {
-        m_Rigidbody = GetComponent<Rigidbody>();
-        m_Animator = GetComponent<Animator>();
-        m_Capsule = GetComponent<CapsuleCollider>();
-    }
 
     public void Move(Vector3 move)
     {
-        print(move.ToString());
+        if(move.sqrMagnitude <= 0)
+        {
+            return;
+        }
+
+        Vector3 dir = new Vector3(move.x, 0, move.z);
+        dir.Normalize();
 
         // 이동.
-        Vector3 translation = move * m_MoveSpeed * Time.deltaTime;
-        transform.Translate(translation);
+        transform.position += dir * m_MoveSpeed * Time.deltaTime;
 
-        //// 회전.
-        //Vector3 euler = new Vector3(0, Mathf.Atan2(move.x, move.z) * m_TurnSpeed * Time.deltaTime, 0);
-        //transform.Rotate(euler);
+        // 회전.
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.7f);
     }
 }

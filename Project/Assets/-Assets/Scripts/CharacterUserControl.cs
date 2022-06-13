@@ -4,6 +4,8 @@ using UnityEngine;
 
 /// <summary>
 /// 
+/// [참고]
+/// 
 /// 시네머신 관련.
 /// + https://www.youtube.com/watch?v=537B1kJp9YQ
 /// 
@@ -14,7 +16,9 @@ using UnityEngine;
 /// </summary>
 public class CharacterUserControl : MonoBehaviour
 {
-    private Character m_Character;
+    public Character character;
+    public FollowTarget followTarget;
+
     private Transform m_Cam;
 
     private Vector3 m_PlayerMovementInput;
@@ -23,7 +27,6 @@ public class CharacterUserControl : MonoBehaviour
     private void Start()
     {
         m_Cam = Camera.main.transform;
-        m_Character = GetComponent<Character>();
     }
 
     private void Update()
@@ -37,6 +40,11 @@ public class CharacterUserControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        m_Character.Move(m_PlayerMovementInput);
+        // 캐릭터 이동.
+        character.Move(m_PlayerMovementInput);
+
+        // 카메라 타겟 위치를 캐릭터 위치로 옮기기.
+        followTarget.Follow(character.transform.position);
+        followTarget.Rotate(m_PlayerMouseInput);
     }
 }

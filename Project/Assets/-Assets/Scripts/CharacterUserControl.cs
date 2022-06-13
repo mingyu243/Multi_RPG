@@ -24,6 +24,8 @@ public class CharacterUserControl : MonoBehaviour
     private Vector3 m_PlayerMovementInput;
     private Vector3 m_PlayerMouseInput;
 
+
+
     private void Start()
     {
         m_Cam = Camera.main.transform;
@@ -35,7 +37,21 @@ public class CharacterUserControl : MonoBehaviour
         float v = Input.GetAxis("Vertical");
 
         m_PlayerMovementInput = (v * m_Cam.forward) + (h * m_Cam.right);
-        m_PlayerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        m_PlayerMouseInput = new Vector2(Input.GetAxis("Mouse X"), 0);
+
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            character.SetRunning(true);
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            character.SetRunning(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            character.PlayRoll();
+        }
     }
 
     private void FixedUpdate()

@@ -5,21 +5,56 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [SerializeField] float m_MoveSpeed = 3;
+    [SerializeField] float m_RunSpeed = 5;
+
+    private bool m_IsRunning = false;
+    private bool m_IsRolling = false;
+
+    Animator m_Animator;
+
+    void Start()
+    {
+        m_Animator = GetComponent<Animator>();
+    }
+
+    public void SetRunning(bool isActive)
+    {
+        m_IsRunning = isActive;
+    }
+    public void PlayRoll()
+    {
+        m_Animator.SetTrigger("ROLL");
+        m_IsRolling = true;
+    }
 
     public void Move(Vector3 move)
     {
-        if(move.sqrMagnitude <= 0)
+        if(!CanMove())
         {
             return;
         }
 
+        // 이동 애니메이션.
+        m_Animator.SetFloat("DIRECTION_FORWARD", move.magnitude);
+
+        // 이동, 회전.
         Vector3 dir = new Vector3(move.x, 0, move.z);
-        dir.Normalize();
+        if (dir.sqrMagnitude > 0)
+        {
+            if(m_IsRunning)
+            {
+                transform.position += dir * m_RunSpeed * Time.deltaTime;
+            }
+            else
+            {
+                transform.position += dir * m_MoveSpeed * Time.deltaTime;
+            }
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.5f);
+        }
+    }
 
-        // 이동.
-        transform.position += dir * m_MoveSpeed * Time.deltaTime;
-
-        // 회전.
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.7f);
+    private bool CanMove()
+    {
+        return (m_IsRolling == false);
     }
 }

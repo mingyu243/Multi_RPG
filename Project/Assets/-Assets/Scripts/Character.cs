@@ -5,10 +5,6 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [SerializeField] float m_MoveSpeed = 3;
-    [SerializeField] float m_RunSpeed = 5;
-
-    private bool m_IsRunning = false;
-    private bool m_IsRolling = false;
 
     Animator m_Animator;
 
@@ -16,15 +12,9 @@ public class Character : MonoBehaviour
     {
         m_Animator = GetComponent<Animator>();
     }
-
-    public void SetRunning(bool isActive)
-    {
-        m_IsRunning = isActive;
-    }
     public void PlayRoll()
     {
         m_Animator.SetTrigger("ROLL");
-        m_IsRolling = true;
     }
 
     public void Move(Vector3 move)
@@ -41,20 +31,13 @@ public class Character : MonoBehaviour
         Vector3 dir = new Vector3(move.x, 0, move.z);
         if (dir.sqrMagnitude > 0)
         {
-            if(m_IsRunning)
-            {
-                transform.position += dir * m_RunSpeed * Time.deltaTime;
-            }
-            else
-            {
-                transform.position += dir * m_MoveSpeed * Time.deltaTime;
-            }
+            transform.position += dir * m_MoveSpeed * Time.deltaTime;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.5f);
         }
     }
 
     private bool CanMove()
     {
-        return (m_IsRolling == false);
+        return (m_Animator.GetBool("IS_ROLLING") == false);
     }
 }

@@ -39,15 +39,6 @@ public class CharacterUserControl : MonoBehaviour
         m_PlayerMovementInput = (v * m_Cam.forward) + (h * m_Cam.right);
         m_PlayerMouseInput = new Vector2(Input.GetAxis("Mouse X"), 0);
 
-        if(Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            character.SetRunning(true);
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            character.SetRunning(false);
-        }
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             character.PlayRoll();

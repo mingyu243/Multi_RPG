@@ -8,35 +8,60 @@ public class Character : MonoBehaviour
 
     Animator m_Animator;
 
+    Vector3 m_InputMove;
+    Vector3 m_MoveXZ;
+
     void Start()
     {
         m_Animator = GetComponent<Animator>();
     }
     public void PlayRoll()
     {
+        if(!CanRoll())
+        {
+            return;
+        }
+
+        DirectRotate();
         m_Animator.SetTrigger("ROLL");
     }
 
-    public void Move(Vector3 move)
+    public void Move(Vector3 inputMove)
     {
-        if(!CanMove())
+        m_InputMove = inputMove;
+
+        m_MoveXZ = new Vector3(m_InputMove.x, 0, m_InputMove.z);
+
+        if (!CanMove())
         {
             return;
         }
 
         // 이동 애니메이션.
-        m_Animator.SetFloat("DIRECTION_FORWARD", move.magnitude);
+        m_Animator.SetFloat("DIRECTION_FORWARD", m_InputMove.magnitude);
 
-        // 이동, 회전.
-        Vector3 dir = new Vector3(move.x, 0, move.z);
-        if (dir.sqrMagnitude > 0)
+        if (m_MoveXZ.sqrMagnitude > 0)
         {
-            transform.position += dir * m_MoveSpeed * Time.deltaTime;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.5f);
+            m_MoveXZ.Normalize();
+            transform.position += m_MoveXZ * m_MoveSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_MoveXZ), 0.3f);
+        }
+    }
+    private void DirectRotate()
+    {
+        if (m_MoveXZ.sqrMagnitude > 0)
+        {
+            m_MoveXZ.Normalize();
+            transform.rotation = Quaternion.LookRotation(m_MoveXZ);
         }
     }
 
     private bool CanMove()
+    {
+        return (m_Animator.GetBool("IS_ROLLING") == false);
+    }
+
+    private bool CanRoll()
     {
         return (m_Animator.GetBool("IS_ROLLING") == false);
     }

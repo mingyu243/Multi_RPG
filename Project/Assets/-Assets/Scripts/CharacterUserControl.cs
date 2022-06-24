@@ -16,14 +16,13 @@ using UnityEngine;
 /// </summary>
 public class CharacterUserControl : MonoBehaviour
 {
-    public Character character;
-    public FollowTarget followTarget;
+    [SerializeField] Character character;
+    [SerializeField] CameraFollowTarget cameraFollowTarget;
 
     private Transform m_Cam;
 
     private Vector3 m_PlayerMovementInput;
     private Vector3 m_PlayerMouseInput;
-
 
 
     private void Start()
@@ -33,15 +32,19 @@ public class CharacterUserControl : MonoBehaviour
 
     private void Update()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal");// * Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxis("Vertical");// * Input.GetAxisRaw("Vertical");
 
         m_PlayerMovementInput = (v * m_Cam.forward) + (h * m_Cam.right);
         m_PlayerMouseInput = new Vector2(Input.GetAxis("Mouse X"), 0);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             character.PlayRoll();
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            character.PlayJump();
         }
     }
 
@@ -51,7 +54,7 @@ public class CharacterUserControl : MonoBehaviour
         character.Move(m_PlayerMovementInput);
 
         // 카메라 타겟 위치를 캐릭터 위치로 옮기기.
-        followTarget.Follow(character.transform.position);
-        followTarget.Rotate(m_PlayerMouseInput);
+        cameraFollowTarget.Follow(character.transform.position);
+        cameraFollowTarget.Rotate(m_PlayerMouseInput);
     }
 }

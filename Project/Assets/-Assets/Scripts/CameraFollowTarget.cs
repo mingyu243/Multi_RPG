@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowTarget : MonoBehaviour
+public class CameraFollowTarget : MonoBehaviour
 {
     [SerializeField] float m_RotateSpeed = 5;
 

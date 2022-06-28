@@ -32,8 +32,8 @@ public class CharacterUserControl : MonoBehaviour
 
     private void Update()
     {
-        float h = Input.GetAxis("Horizontal");// * Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxis("Vertical");// * Input.GetAxisRaw("Vertical");
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
 
         m_PlayerMovementInput = (v * m_Cam.forward) + (h * m_Cam.right);
         m_PlayerMouseInput = new Vector2(Input.GetAxis("Mouse X"), 0);

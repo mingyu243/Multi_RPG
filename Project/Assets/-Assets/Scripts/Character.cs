@@ -16,9 +16,9 @@ public class Character : MonoBehaviour
     Vector3 m_InputMove;
     Vector3 m_MoveXZ;
 
+    // 상태.
     private bool IsRolling { get { return m_Animator.GetBool("IS_ROLLING"); }}
-    private bool IsJumping { get { return m_Animator.GetBool("IS_JUMPING"); } }
-    private bool IsGrounded { get { return Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.3f); }}
+    private bool IsGrounded;
 
     void Start()
     {
@@ -42,8 +42,15 @@ public class Character : MonoBehaviour
         {
             return;
         }
-
+        
         m_Rigidbody.AddForce(Vector3.up * m_JumpPower, ForceMode.Impulse);
+        m_Animator.SetTrigger("JUMP");
+    }
+
+    private void Update()
+    {
+        IsGrounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.3f);
+        m_Animator.SetBool("IS_GROUNDED", IsGrounded);
     }
 
     public void Move(Vector3 inputMove)
@@ -59,12 +66,12 @@ public class Character : MonoBehaviour
         }
 
         // 이동 애니메이션.
-        float forwardPower = m_InputMove.magnitude;
+        float forwardPower = m_MoveXZ.magnitude;
         m_Animator.SetFloat("DIRECTION_FORWARD", forwardPower);
 
         if (forwardPower > 0)
         {
-            transform.position += (m_MoveXZ * m_MoveSpeed * Time.deltaTime) * forwardPower;
+            transform.position += (m_MoveXZ * m_MoveSpeed) * forwardPower * Time.deltaTime;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_MoveXZ), 0.3f);
         }
     }
@@ -88,6 +95,6 @@ public class Character : MonoBehaviour
 
     private bool CanJump()
     {
-        return (IsGrounded == true) && (IsJumping == false);
+        return (IsGrounded == true);
     }
 }

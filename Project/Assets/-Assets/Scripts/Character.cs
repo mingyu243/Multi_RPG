@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
 
     Vector3 m_InputMove;
     Vector3 m_MoveXZ;
+    float m_ForwardPower;
 
     // 상태.
     private bool IsRolling { get { return m_Animator.GetBool("IS_ROLLING"); }}
@@ -57,24 +58,21 @@ public class Character : MonoBehaviour
     {
         m_InputMove = inputMove;
 
-        m_MoveXZ = new Vector3(m_InputMove.x, 0, m_InputMove.z);
-        m_MoveXZ.Normalize();
+        // 앞으로 가는 속력 구하기.
+        m_ForwardPower = Mathf.Clamp(m_InputMove.magnitude, 0, 1); // 대각선으로 갈 때 빨라지는 것을 방지.
+        m_Animator.SetFloat("DIRECTION_FORWARD", m_ForwardPower);
 
-        if (!CanMove())
+        // 이동하기.
+        if ((m_ForwardPower > 0) && CanMove())
         {
-            return;
-        }
+            m_MoveXZ = new Vector3(m_InputMove.x, 0, m_InputMove.z); // Y축을 제외한 방향 구하기.
+            m_MoveXZ.Normalize();
 
-        // 이동 애니메이션.
-        float forwardPower = m_MoveXZ.magnitude;
-        m_Animator.SetFloat("DIRECTION_FORWARD", forwardPower);
-
-        if (forwardPower > 0)
-        {
-            transform.position += (m_MoveXZ * m_MoveSpeed) * forwardPower * Time.deltaTime;
+            transform.position += (m_MoveXZ * m_MoveSpeed) * m_ForwardPower * Time.deltaTime;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_MoveXZ), 0.3f);
         }
     }
+
     private void DirectRotate()
     {
         if (m_MoveXZ.sqrMagnitude > 0)

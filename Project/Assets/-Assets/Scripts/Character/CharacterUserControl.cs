@@ -26,6 +26,7 @@ public class CharacterUserControl : MonoBehaviour
     [Header("Inputs")]
     [SerializeField] float m_Horizontal; // 수평. (좌우)
     [SerializeField] float m_Vertical; // 수직. (위아래)
+    [SerializeField] float m_MouseX; // 마우스 좌우.
 
     [SerializeField] Vector3 m_PlayerMovementInput;
     [SerializeField] Vector3 m_PlayerMouseInput;
@@ -40,9 +41,10 @@ public class CharacterUserControl : MonoBehaviour
     {
         m_Horizontal = Input.GetAxis("Horizontal");
         m_Vertical = Input.GetAxis("Vertical");
+        m_MouseX = Input.GetAxis("Mouse X");
 
         m_PlayerMovementInput = (m_Horizontal * m_Cam.forward) + (m_Vertical * m_Cam.right);
-        m_PlayerMouseInput = new Vector2(Input.GetAxis("Mouse X"), 0);
+        m_PlayerMouseInput = new Vector2(m_MouseX, 0);
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {

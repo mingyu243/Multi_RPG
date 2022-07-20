@@ -30087,8 +30087,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1cabfc0d4ea1249b7486cfd4b5f0e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 3385304618797113020}
-  cameraFollowTarget: {fileID: 472355271}
+  m_Cam: {fileID: 0}
+  m_Character: {fileID: 3385304618797113020}
+  m_CameraFollowTarget: {fileID: 472355271}
+  m_Horizontal: 0
+  m_Vertical: 0
   m_PlayerMovementInput: {x: 0, y: 0, z: 0}
   m_PlayerMouseInput: {x: 0, y: 0, z: 0}
 --- !u!114 &1170207945
@@ -35549,27 +35552,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BaseCharacter
-      objectReference: {fileID: 0}
-    - target: {fileID: 779354556226341752, guid: 1e5b8cb01b092244587aa033c4ef07a1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3385304618797113014, guid: 1e5b8cb01b092244587aa033c4ef07a1,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: ec291ec13f791de49bd13523a4dbcaa1,
-        type: 2}
-    - target: {fileID: 3385304618797113016, guid: 1e5b8cb01b092244587aa033c4ef07a1,
-        type: 3}
-      propertyPath: m_AngularDrag
-      value: 999
-      objectReference: {fileID: 0}
-    - target: {fileID: 3385304618797113020, guid: 1e5b8cb01b092244587aa033c4ef07a1,
-        type: 3}
-      propertyPath: m_JumpPower
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e5b8cb01b092244587aa033c4ef07a1, type: 3}

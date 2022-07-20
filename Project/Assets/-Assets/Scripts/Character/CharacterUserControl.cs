@@ -43,7 +43,7 @@ public class CharacterUserControl : MonoBehaviour
         m_Vertical = Input.GetAxis("Vertical");
         m_MouseX = Input.GetAxis("Mouse X");
 
-        m_PlayerMovementInput = (m_Horizontal * m_Cam.forward) + (m_Vertical * m_Cam.right);
+        m_PlayerMovementInput = (m_Vertical * m_Cam.forward) + (m_Horizontal * m_Cam.right);
         m_PlayerMouseInput = new Vector2(m_MouseX, 0);
 
         if (Input.GetKeyDown(KeyCode.LeftShift))

@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using SimpleJSON;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,10 +17,10 @@ public class GoogleSheetsLoader : MonoBehaviour
         Dictionary<string, EquipmentDTO> dicEquipment
         )
     {
-        // ±âº» ¾ÆÀÌÅÛ µ¥ÀÌÅÍ.
+        // ê¸°ë³¸ ì•„ì´í…œ ë°ì´í„°.
         await SetItemData(dicItem);
 
-        // ¼¼ºÎ ¾ÆÀÌÅÛ µ¥ÀÌÅÍ.
+        // ì„¸ë¶€ ì•„ì´í…œ ë°ì´í„°.
         await SetEquipmentData(dicItem, dicEquipment);
 
 

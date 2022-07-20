@@ -62,7 +62,7 @@ public class Character : MonoBehaviour
         m_InputMove = inputMove;
 
         // 앞으로 가는 속력 구하기.
-        m_ForwardPower = Mathf.Clamp(m_InputMove.magnitude, 0, 1); // 대각선으로 갈 때 빨라지는 것을 방지.
+        m_ForwardPower = Mathf.Clamp(m_InputMove.magnitude, 0, 1); // 대각선으로 갈 때, 빨라지는 것을 방지.
         m_Animator.SetFloat("DIRECTION_FORWARD", m_ForwardPower);
 
         // 이동하기.

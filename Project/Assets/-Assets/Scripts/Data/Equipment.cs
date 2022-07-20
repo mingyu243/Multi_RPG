@@ -1,6 +1,6 @@
-using System;
+ï»¿using System;
 
-public class EquipmentEntity // Å×ÀÌºí°ú ¶È°°Àº µ¥ÀÌÅÍ.
+public class EquipmentEntity // í…Œì´ë¸”ê³¼ ë˜‘ê°™ì€ ë°ì´í„°.
 {
     public string _id;
     public string name;
@@ -20,7 +20,7 @@ public class EquipmentEntity // Å×ÀÌºí°ú ¶È°°Àº µ¥ÀÌÅÍ.
     }
 }
 
-public class EquipmentDTO : ItemDTO // ÇÁ·Î±×·¡¹Ö¿¡¼­ »ç¿ëÇÒ µ¥ÀÌÅÍ.
+public class EquipmentDTO : ItemDTO // í”„ë¡œê·¸ë˜ë°ì—ì„œ ì‚¬ìš©í•  ë°ì´í„°.
 {
     private EquipmentEntity equipment;
 

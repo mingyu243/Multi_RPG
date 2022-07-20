@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +17,6 @@ public class DataManager : MonoBehaviour
     public async UniTaskVoid Init()
     {
         //await GoogleSheetsLoader.RequestSheetAsync(ItemDictionary, );
-        print("µ¥ÀÌÅÍ ·Îµù ³¡.");
+        print("ë°ì´í„° ë¡œë”© ë.");
     }
 }

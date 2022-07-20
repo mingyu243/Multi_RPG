@@ -10,6 +10,7 @@ public class Character : MonoBehaviour
 
     [Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
     [SerializeField] SkinnedMeshRenderer m_SocketBelt;
+    [SerializeField] LayerMask m_CheckOnGroundedLayer;
 
     [Header("Inputs")] // 입력받은 값.
     [SerializeField] Vector3 m_InputMove;
@@ -20,9 +21,9 @@ public class Character : MonoBehaviour
     [SerializeField] float m_MoveSpeed = 7;
     [SerializeField] float m_JumpPower = 5;
 
-    //[Header("States")] // 상태.
-    [SerializeField] bool IsRolling { get { return m_Animator.GetBool("IS_ROLLING"); }}
-    [SerializeField] bool IsGrounded;
+    [Header("States")] // 상태.
+    [SerializeField] bool m_IsRolling;
+    [SerializeField] bool m_OnGrounded;
 
     void Start()
     {
@@ -53,8 +54,10 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        IsGrounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.3f);
-        m_Animator.SetBool("IS_GROUNDED", IsGrounded);
+        m_OnGrounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.3f, m_CheckOnGroundedLayer);
+        m_Animator.SetBool("ON_GROUNDED", m_OnGrounded);
+
+        m_IsRolling = m_Animator.GetBool("IS_ROLLING");
     }
 
     public void Move(Vector3 inputMove)
@@ -86,16 +89,16 @@ public class Character : MonoBehaviour
 
     private bool CanMove()
     {
-        return (IsRolling == false);
+        return (m_IsRolling == false);
     }
 
     private bool CanRoll()
     {
-        return (IsRolling == false);
+        return (m_IsRolling == false);
     }
 
     private bool CanJump()
     {
-        return (IsGrounded == true);
+        return (m_OnGrounded == true);
     }
 }

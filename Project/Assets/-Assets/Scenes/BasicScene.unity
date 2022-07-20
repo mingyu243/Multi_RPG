@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 44601866}
   - component: {fileID: 44601865}
   - component: {fileID: 44601864}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 161671752}
   - component: {fileID: 161671751}
   - component: {fileID: 161671750}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 166460261}
   - component: {fileID: 166460260}
   - component: {fileID: 166460259}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10267,7 +10267,7 @@ GameObject:
   - component: {fileID: 465075445}
   - component: {fileID: 465075444}
   - component: {fileID: 465075443}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10409,7 +10409,7 @@ GameObject:
   - component: {fileID: 486531929}
   - component: {fileID: 486531928}
   - component: {fileID: 486531927}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10503,7 +10503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 700848142}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MAP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30092,6 +30092,7 @@ MonoBehaviour:
   m_CameraFollowTarget: {fileID: 472355271}
   m_Horizontal: 0
   m_Vertical: 0
+  m_MouseX: 0
   m_PlayerMovementInput: {x: 0, y: 0, z: 0}
   m_PlayerMouseInput: {x: 0, y: 0, z: 0}
 --- !u!114 &1170207945
@@ -30162,7 +30163,7 @@ GameObject:
   - component: {fileID: 1239183583}
   - component: {fileID: 1239183582}
   - component: {fileID: 1239183581}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

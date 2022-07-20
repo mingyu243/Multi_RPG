@@ -6359,12 +6359,16 @@ MonoBehaviour:
   m_Animator: {fileID: 0}
   m_Rigidbody: {fileID: 0}
   m_SocketBelt: {fileID: 0}
+  m_CheckOnGroundedLayer:
+    serializedVersion: 2
+    m_Bits: 128
   m_InputMove: {x: 0, y: 0, z: 0}
   m_MoveXZ: {x: 0, y: 0, z: 0}
   m_ForwardPower: 0
   m_MoveSpeed: 7
-  m_JumpPower: 10
-  IsGrounded: 0
+  m_JumpPower: 13
+  m_IsRolling: 0
+  m_OnGrounded: 0
 --- !u!1 &779354556226341754
 GameObject:
   m_ObjectHideFlags: 0

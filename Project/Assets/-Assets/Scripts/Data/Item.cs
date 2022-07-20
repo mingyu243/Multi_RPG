@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+ï»¿using System;
 
-public class ItemEntity // Å×ÀÌºí°ú ¶È°°Àº µ¥ÀÌÅÍ.
+public class ItemEntity // í…Œì´ë¸”ê³¼ ë˜‘ê°™ì€ ë°ì´í„°.
 {
     public string _id;
     public string name;
@@ -10,21 +8,37 @@ public class ItemEntity // Å×ÀÌºí°ú ¶È°°Àº µ¥ÀÌÅÍ.
     public string description;
     public string path_mesh;
     public string path_image;
+
+    public ItemEntity(string id, string name, string type, string description, string path_mesh, string path_image)
+    {
+        _id = id;
+        this.name = name;
+        this.type = (ItemType)Enum.Parse(typeof(ItemType), type);
+        this.description = description;
+        this.path_mesh = path_mesh;
+        this.path_image = path_image;
+    }
 }
-
-public class ItemDTO // ÇÁ·Î±×·¡¹Ö¿¡¼­ »ç¿ëÇÒ µ¥ÀÌÅÍ.
-{
-    private ItemEntity entity;
-
-    public string Id { get => entity._id; }
-    public string Name { get => entity.name; }
-    public ItemType Type { get => entity.type; }
-    public string Description { get => entity.description; }
-    public string PathMesh { get => entity.path_mesh; }
-    public string PathImage { get => entity.path_image; }
-}
-
 public enum ItemType
 {
 
 }
+
+public class ItemDTO // í”„ë¡œê·¸ë˜ë°ì—ì„œ ì‚¬ìš©í•  ë°ì´í„°.
+{
+    private ItemEntity item;
+
+    public ItemDTO(ItemEntity item)
+    {
+        this.item = item;
+    }
+
+    public string Id { get => item._id; }
+    public string Name { get => item.name; }
+    public ItemType Type { get => item.type; }
+    public string Description { get => item.description; }
+    public string PathMesh { get => item.path_mesh; }
+    public string PathImage { get => item.path_image; }
+}
+
+

@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
+    [SerializeField] Animator m_Animator;
+    [SerializeField] Rigidbody m_Rigidbody;
+
+    [Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
+    [SerializeField] SkinnedMeshRenderer m_SocketBelt;
+
+    [Header("Inputs")] // 입력받은 값.
+    [SerializeField] Vector3 m_InputMove;
+    [SerializeField] Vector3 m_MoveXZ;
+    [SerializeField] float m_ForwardPower;
+
+    [Header("Stats")] // 능력. 
     [SerializeField] float m_MoveSpeed = 7;
     [SerializeField] float m_JumpPower = 5;
 
-    [Header("장비 소켓")]
-    [SerializeField] SkinnedMeshRenderer socket_belt;
-
-    Animator m_Animator;
-    Rigidbody m_Rigidbody;
-
-    Vector3 m_InputMove;
-    Vector3 m_MoveXZ;
-    float m_ForwardPower;
-
-    // 상태.
-    private bool IsRolling { get { return m_Animator.GetBool("IS_ROLLING"); }}
-    private bool IsGrounded;
+    //[Header("States")] // 상태.
+    [SerializeField] bool IsRolling { get { return m_Animator.GetBool("IS_ROLLING"); }}
+    [SerializeField] bool IsGrounded;
 
     void Start()
     {

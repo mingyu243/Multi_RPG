@@ -9,12 +9,15 @@ public class GoogleSheetsLoader : MonoBehaviour
 {
     static string SHEETS_URL = "https://docs.google.com/spreadsheets/d/{0}/gviz/tq?gid={1}";
     static string SHEETS_ID = "1wYGpgtukyGSoozUvHM746XwNSs500977LOwsKdd6pbY";
+
     static string SHEET_ID_ITEM = "1912785264";
     static string SHEET_ID_EQUIPMENT = "0";
+    static string SHEET_ID_ARMOR = "1492396631";
+    static string SHEET_ID_WEAPON = "725871172";
 
-    public static async UniTaskVoid RequestSheetAsync(
-        Dictionary<string, ItemDTO> dicItem,
-        Dictionary<string, EquipmentDTO> dicEquipment
+    public static async UniTask RequestSheetAsync(
+        Dictionary<string, ItemEntity> dic_Item, Dictionary<string, EquipmentEntity> dic_Equipment,
+        Dictionary<string, ArmorEntity> dic_Armor, Dictionary<string, WeaponEntity> dic_Weapon
         )
     {
         // 기본 아이템 데이터.

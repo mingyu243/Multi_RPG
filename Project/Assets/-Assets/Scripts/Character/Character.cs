@@ -9,8 +9,8 @@ public class Character : MonoBehaviour
     [SerializeField] Rigidbody m_Rigidbody;
 
     [Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
-    [SerializeField] SkinnedMeshRenderer m_SocketBelt;
     [SerializeField] LayerMask m_CheckOnGroundedLayer;
+    [SerializeField] SkinnedMeshRenderer m_SocketBelt;
 
     [Header("Inputs")] // 입력받은 값.
     [SerializeField] Vector3 m_InputMove;
@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
 
     [Header("Stats")] // 능력. 
     [SerializeField] float m_MoveSpeed = 7;
-    [SerializeField] float m_JumpPower = 5;
+    [SerializeField] float m_JumpPower = 12;
 
     [Header("States")] // 상태.
     [SerializeField] bool m_IsRolling;

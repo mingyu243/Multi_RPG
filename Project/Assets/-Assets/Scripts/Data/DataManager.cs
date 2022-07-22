@@ -6,13 +6,15 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    public Dictionary<string, ItemEntity> m_Dic_ItemEntity = new Dictionary<string, ItemEntity>();
-    public Dictionary<string, EquipmentEntity> m_Dic_EquipmentEntity = new Dictionary<string, EquipmentEntity>();
-    public Dictionary<string, ArmorEntity> m_Dic_ArmorEntity = new Dictionary<string, ArmorEntity>();
-    public Dictionary<string, WeaponEntity> m_Dic_WeaponEntity = new Dictionary<string, WeaponEntity>();
+    static Dictionary<string, ItemEntity> m_Dic_ItemEntity = new Dictionary<string, ItemEntity>();
+    static Dictionary<string, EquipmentEntity> m_Dic_EquipmentEntity = new Dictionary<string, EquipmentEntity>();
+    static Dictionary<string, ArmorEntity> m_Dic_ArmorEntity = new Dictionary<string, ArmorEntity>();
+    static Dictionary<string, WeaponEntity> m_Dic_WeaponEntity = new Dictionary<string, WeaponEntity>();
 
-    public Dictionary<string, ArmorDTO> m_Dic_ArmorDTO = new Dictionary<string, ArmorDTO>();
-    public Dictionary<string, WeaponDTO> m_Dic_WeaponDTO = new Dictionary<string, WeaponDTO>();
+    static Dictionary<string, ArmorDTO> m_Dic_ArmorDTO = new Dictionary<string, ArmorDTO>();
+    static Dictionary<string, WeaponDTO> m_Dic_WeaponDTO = new Dictionary<string, WeaponDTO>();
+
+    public static Dictionary<string, ArmorDTO> ArmorDic { get => m_Dic_ArmorDTO; }
 
     private void Awake()
     {
@@ -49,16 +51,16 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    private void MakeDTO<T1, T2>(Dictionary<string, T1> dicDTO, Dictionary<string, T2> dicEntity) 
-        where T1 : IDTO
+    private void MakeDTO<T1, T2>(Dictionary<string, T1> dicDTO, Dictionary<string, T2> dicEntity, ) 
+        where T1 : IDTO, new()
         where T2 : IEntity
     {
         dicDTO.EnsureCapacity(dicEntity.Count);
 
-        foreach(KeyValuePair<string, T1> pair in dicEntity)
+        foreach(KeyValuePair<string, T2> pair in dicEntity)
         {
             string k = pair.Key;
-            dicDTO.Add();
+            dicDTO.Add(k, new T1());
         }
     }
 }

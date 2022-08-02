@@ -37,7 +37,6 @@ public class GameInstance : MonoBehaviour
             s_instance = go.GetComponent<GameInstance>();
 
             s_instance._data.Init();
-
         }
     }
 }

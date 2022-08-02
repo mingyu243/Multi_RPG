@@ -21,10 +21,10 @@ public class GoogleSheetsLoader : MonoBehaviour
         )
     {
         // 기본 아이템 데이터.
-        await SetItemData(dicItem);
+        //await SetItemData(dicItem);
 
         // 세부 아이템 데이터.
-        await SetEquipmentData(dicItem, dicEquipment);
+        //await SetEquipmentData(dicItem, dicEquipment);
 
 
 

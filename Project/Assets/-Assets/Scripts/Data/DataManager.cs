@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class DataManager : MonoBehaviour
+public class DataManager
 {
     static Dictionary<string, ItemEntity> m_Dic_ItemEntity = new Dictionary<string, ItemEntity>();
     static Dictionary<string, EquipmentEntity> m_Dic_EquipmentEntity = new Dictionary<string, EquipmentEntity>();
@@ -29,12 +29,12 @@ public class DataManager : MonoBehaviour
         // 데이터들을 클래스에 맞게 조합해서 정리해줌.
         CombineEntityToMakeDTO();
 
-        print("데이터 로딩 끝.");
+        //print("데이터 로딩 끝.");
     }
 
     public void CombineEntityToMakeDTO()
     {
-        MakeDTO<ArmorDTO, ArmorEntity>(m_Dic_ArmorDTO, m_Dic_ArmorEntity);
+        //MakeDTO<ArmorDTO, ArmorEntity>(m_Dic_ArmorDTO, m_Dic_ArmorEntity);
 
         m_Dic_ArmorDTO.EnsureCapacity(m_Dic_ArmorEntity.Count);
         foreach (KeyValuePair<string, ArmorEntity> pair in m_Dic_ArmorEntity)
@@ -44,14 +44,14 @@ public class DataManager : MonoBehaviour
         }
 
         m_Dic_WeaponDTO.EnsureCapacity(m_Dic_WeaponEntity.Count);
-        foreach (KeyValuePair<string, WeaponEntity> pair in m_Dic_ArmorEntity)
-        {
-            string k = pair.Key;
-            m_Dic_WeaponDTO.Add(k, new EquipmentDTO(m_Dic_ItemEntity[k], m_Dic_EquipmentEntity[k], m_Dic_WeaponEntity[k]));
-        }
+        //foreach (KeyValuePair<string, WeaponEntity> pair in m_Dic_ArmorEntity)
+        //{
+            //string k = pair.Key;
+            //m_Dic_WeaponDTO.Add(k, new EquipmentDTO(m_Dic_ItemEntity[k], m_Dic_EquipmentEntity[k], m_Dic_WeaponEntity[k]));
+        //}
     }
 
-    private void MakeDTO<T1, T2>(Dictionary<string, T1> dicDTO, Dictionary<string, T2> dicEntity, ) 
+    private void MakeDTO<T1, T2>(Dictionary<string, T1> dicDTO, Dictionary<string, T2> dicEntity) 
         where T1 : IDTO, new()
         where T2 : IEntity
     {

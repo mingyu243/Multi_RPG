@@ -13,8 +13,12 @@ public class GameInstance : MonoBehaviour
     static GameInstance Instance { get { Init(); return s_instance; } }
 
     DataManager _data = new DataManager();
+    InputManager _input = new InputManager();
+    ResourceManager _resource = new ResourceManager();
 
     public static DataManager Data { get { return Instance._data; } }
+    public static InputManager Input { get { return Instance._input; } }
+    public static ResourceManager Resource { get { return Instance._resource; } }
 
 
     void Start()

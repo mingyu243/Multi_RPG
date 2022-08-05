@@ -10836,7 +10836,7 @@ GameObject:
   - component: {fileID: 779354556223444756}
   - component: {fileID: 779354556224411092}
   m_Layer: 0
-  m_Name: BackPack1
+  m_Name: Backpack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10919,7 +10919,7 @@ GameObject:
   - component: {fileID: 779354556223444758}
   - component: {fileID: 779354556224411094}
   m_Layer: 0
-  m_Name: BackPack2
+  m_Name: Backpack2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15164,8 +15164,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5feb983493c094fbddcc21b603a618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  socket_belt: {fileID: 0}
+  m_Animator: {fileID: 0}
+  m_Rigidbody: {fileID: 0}
+  m_CheckOnGroundedLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  m_SocketBelt: {fileID: 0}
+  m_InputMove: {x: 0, y: 0, z: 0}
+  m_MoveXZ: {x: 0, y: 0, z: 0}
+  m_ForwardPower: 0
   m_MoveSpeed: 3
+  m_JumpPower: 12
+  m_IsRolling: 0
+  m_OnGrounded: 0
 --- !u!1 &779354556226341754
 GameObject:
   m_ObjectHideFlags: 0

@@ -5423,7 +5423,7 @@ GameObject:
   - component: {fileID: 779354556223444756}
   - component: {fileID: 779354556224411092}
   m_Layer: 0
-  m_Name: socket_BackPack
+  m_Name: socket_Backpack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6358,10 +6358,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 0}
   m_Rigidbody: {fileID: 0}
-  m_SocketBelt: {fileID: 0}
   m_CheckOnGroundedLayer:
     serializedVersion: 2
     m_Bits: 128
+  m_SocketBelt: {fileID: 0}
   m_InputMove: {x: 0, y: 0, z: 0}
   m_MoveXZ: {x: 0, y: 0, z: 0}
   m_ForwardPower: 0

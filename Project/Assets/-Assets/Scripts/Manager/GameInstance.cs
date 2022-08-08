@@ -40,7 +40,7 @@ public class GameInstance : MonoBehaviour
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<GameInstance>();
 
-            s_instance._data.Init();
+            //s_instance._data.Init();
         }
     }
 }

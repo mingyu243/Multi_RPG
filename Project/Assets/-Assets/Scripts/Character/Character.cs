@@ -5,8 +5,8 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
-    [SerializeField] Animator m_Animator;
     [SerializeField] Rigidbody m_Rigidbody;
+    [SerializeField] AnimationController m_AnimationController;
 
     [Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
     [SerializeField] LayerMask m_CheckOnGroundedLayer;
@@ -20,6 +20,7 @@ public class Character : MonoBehaviour
     [Header("Stats")] // 능력. 
     [SerializeField] float m_MoveSpeed = 7;
     [SerializeField] float m_JumpPower = 12;
+    [SerializeField] float m_RollPower = 12;
 
     [Header("States")] // 상태.
     [SerializeField] bool m_IsRolling;
@@ -27,8 +28,9 @@ public class Character : MonoBehaviour
 
     void Start()
     {
-        m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
+
+        m_AnimationController = GetComponent<AnimationController>();
     }
 
     public void PlayRoll()
@@ -39,7 +41,8 @@ public class Character : MonoBehaviour
         }
 
         DirectRotate();
-        m_Animator.SetTrigger("ROLL");
+        m_Rigidbody.AddForce(transform.forward * m_RollPower + Vector3.up * -Physics.gravity.y, ForceMode.Impulse);
+        m_AnimationController.Roll();
     }
     public void PlayJump()
     {
@@ -49,15 +52,15 @@ public class Character : MonoBehaviour
         }
         
         m_Rigidbody.AddForce(Vector3.up * m_JumpPower, ForceMode.Impulse);
-        m_Animator.SetTrigger("JUMP");
+        m_AnimationController.Jump();
     }
 
     private void Update()
     {
         m_OnGrounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.3f, m_CheckOnGroundedLayer);
-        m_Animator.SetBool("ON_GROUNDED", m_OnGrounded);
+        m_AnimationController.OnGrounded(m_OnGrounded);
 
-        m_IsRolling = m_Animator.GetBool("IS_ROLLING");
+        m_IsRolling = m_AnimationController.IsRolling();
     }
 
     public void Move(Vector3 inputMove)
@@ -66,7 +69,7 @@ public class Character : MonoBehaviour
 
         // 앞으로 가는 속력 구하기.
         m_ForwardPower = Mathf.Clamp(m_InputMove.magnitude, 0, 1); // 대각선으로 갈 때, 빨라지는 것을 방지.
-        m_Animator.SetFloat("DIRECTION_FORWARD", m_ForwardPower);
+        m_AnimationController.Move(m_ForwardPower);
 
         // 이동하기.
         if ((m_ForwardPower > 0) && CanMove())

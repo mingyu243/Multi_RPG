@@ -164,7 +164,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44601862}
-  m_Material: {fileID: 13400000, guid: 2969bba0b0115e243b3bc0d199e63116, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -261,7 +261,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161671748}
-  m_Material: {fileID: 13400000, guid: 2969bba0b0115e243b3bc0d199e63116, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -10265,7 +10265,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465075441}
-  m_Material: {fileID: 13400000, guid: 2969bba0b0115e243b3bc0d199e63116, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -10407,7 +10407,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 486531925}
-  m_Material: {fileID: 13400000, guid: 2969bba0b0115e243b3bc0d199e63116, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -30161,7 +30161,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1239183579}
-  m_Material: {fileID: 13400000, guid: 2969bba0b0115e243b3bc0d199e63116, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -30548,7 +30548,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6261938, y: 1}
+    m_SensorSize: {x: 2.6371682, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -35473,8 +35473,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 13400000, guid: ec291ec13f791de49bd13523a4dbcaa1,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 40889802446662021, guid: 1e5b8cb01b092244587aa033c4ef07a1,
         type: 3}
       propertyPath: m_Constraints

@@ -112,9 +112,9 @@ GameObject:
   - component: {fileID: 40889802446662075}
   - component: {fileID: 923743012842229346}
   - component: {fileID: 923743012842229345}
-  - component: {fileID: 923743012842229344}
+  - component: {fileID: 757002281958805588}
   m_Layer: 0
-  m_Name: MinePlayer
+  m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,7 +205,6 @@ MonoBehaviour:
   m_CheckOnGroundedLayer:
     serializedVersion: 2
     m_Bits: 128
-  m_SocketBelt: {fileID: 0}
   m_InputMove: {x: 0, y: 0, z: 0}
   m_MoveXZ: {x: 0, y: 0, z: 0}
   m_ForwardPower: 0
@@ -243,15 +242,16 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 2
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 923743012842229344}
+  - {fileID: 40889802446662075}
+  - {fileID: 757002281958805588}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &923743012842229344
+--- !u!114 &757002281958805588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

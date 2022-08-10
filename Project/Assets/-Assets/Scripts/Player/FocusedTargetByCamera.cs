@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollowTarget : MonoBehaviour
+/// <summary>
+/// 카메라가 바라보는 오브젝트.
+/// </summary>
+public class FocusedTargetByCamera : MonoBehaviour
 {
     [SerializeField] float m_RotateSpeed = 5;
 

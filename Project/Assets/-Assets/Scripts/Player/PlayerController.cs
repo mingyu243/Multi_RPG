@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Cinemachine;
 
 /// <summary>
 /// 
@@ -14,6 +15,9 @@ using Photon.Pun;
 /// + https://www.youtube.com/watch?v=b1uoLBp2I1w
 /// + Photon 데모 스크립트. (ThirdPersonUserControl, ThirdPersonCharacter)
 /// 
+/// 네트워크 관련.
+/// + https://velog.io/@minjujuu/Unity-%ED%8F%AC%ED%86%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC
+/// 
 /// </summary>
 public class PlayerController : MonoBehaviourPun
 {
@@ -22,7 +26,7 @@ public class PlayerController : MonoBehaviourPun
     [SerializeField] Character m_Character;
 
     [Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
-    [SerializeField] CameraFollowTarget m_CameraFollowTarget;
+    [SerializeField] FocusedTargetByCamera m_CameraFollowTarget;
 
     [Header("Inputs")]
     [SerializeField] float m_Horizontal; // 수평. (좌우)
@@ -33,14 +37,16 @@ public class PlayerController : MonoBehaviourPun
     [SerializeField] Vector3 m_PlayerMouseInput;
 
 
-    private void Start()
+    public void SetCamera(GameObject camera, CinemachineVirtualCamera cvc)
     {
-        m_Cam = Camera.main.transform;
+        m_Cam = camera.transform;
 
-        if (m_Character != null)
-        {
-            m_Character = PhotonNetwork.Instantiate("MinePlayer", Vector3.zero, Quaternion.identity).GetComponent<Character>();
-        }
+        cvc.Follow = m_CameraFollowTarget.transform;
+    }
+
+    public void OnPossess(Character character)
+    {
+        m_Character = character;
     }
 
     private void Update()

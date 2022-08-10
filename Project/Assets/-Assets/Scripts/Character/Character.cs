@@ -10,7 +10,6 @@ public class Character : MonoBehaviour
 
     [Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
     [SerializeField] LayerMask m_CheckOnGroundedLayer;
-    [SerializeField] SkinnedMeshRenderer m_SocketBelt;
 
     [Header("Inputs")] // 입력받은 값.
     [SerializeField] Vector3 m_InputMove;
@@ -21,6 +20,7 @@ public class Character : MonoBehaviour
     [SerializeField] float m_MoveSpeed = 7;
     [SerializeField] float m_JumpPower = 12;
     [SerializeField] float m_RollPower = 12;
+    [SerializeField] float m_CheckOnGroundedLength = 0.3f;
 
     [Header("States")] // 상태.
     [SerializeField] bool m_IsRolling;
@@ -57,7 +57,7 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        m_OnGrounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.3f, m_CheckOnGroundedLayer);
+        m_OnGrounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, m_CheckOnGroundedLength, m_CheckOnGroundedLayer);
         m_AnimationController.OnGrounded(m_OnGrounded);
 
         m_IsRolling = m_AnimationController.IsRolling();
@@ -77,7 +77,8 @@ public class Character : MonoBehaviour
             m_MoveXZ = new Vector3(m_InputMove.x, 0, m_InputMove.z); // Y축을 제외한 방향 구하기.
             m_MoveXZ.Normalize();
 
-            transform.position += (m_MoveXZ * m_MoveSpeed) * m_ForwardPower * Time.deltaTime;
+            //transform.position += (m_MoveXZ * m_MoveSpeed) * m_ForwardPower * Time.deltaTime;
+            m_Rigidbody.MovePosition(transform.position + (m_MoveXZ * m_MoveSpeed) * m_ForwardPower * Time.deltaTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_MoveXZ), 0.3f);
         }
     }

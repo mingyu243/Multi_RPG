@@ -19,9 +19,9 @@ public class PlayerController : MonoBehaviourPun
 {
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
     [SerializeField] Transform m_Cam;
+    [SerializeField] Character m_Character;
 
     [Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
-    [SerializeField] Character m_Character;
     [SerializeField] CameraFollowTarget m_CameraFollowTarget;
 
     [Header("Inputs")]
@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviourPun
     private void Start()
     {
         m_Cam = Camera.main.transform;
+
+        if (m_Character != null)
+        {
+            m_Character = PhotonNetwork.Instantiate("MinePlayer", Vector3.zero, Quaternion.identity).GetComponent<Character>();
+        }
     }
 
     private void Update()

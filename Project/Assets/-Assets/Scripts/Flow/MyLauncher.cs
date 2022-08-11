@@ -9,7 +9,7 @@ using TMPro;
 public class MyLauncher : MonoBehaviourPunCallbacks
 {
     [SerializeField] TMP_InputField m_RoomName;
-    [SerializeField] TMP_InputField m_PlayerName;
+    [SerializeField] TMP_InputField m_NickName;
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class MyLauncher : MonoBehaviourPunCallbacks
     public void JoinOrCreateRoom() // button event.
     {
         string roomName = m_RoomName.text;
-        string playerName = m_PlayerName.text;
+        string playerName = m_NickName.text;
 
         PhotonNetwork.LocalPlayer.NickName = playerName;
 

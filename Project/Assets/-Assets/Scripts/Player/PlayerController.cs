@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviourPun
     [SerializeField] Vector3 m_PlayerMovementInput;
     [SerializeField] Vector3 m_PlayerMouseInput;
 
+    void Start()
+    {
+        //GameInstance.Input.KeyAction -= CheckInput;
+        //GameInstance.Input.KeyAction += CheckInput;
+    }
 
     public void SetCamera(GameObject camera, CinemachineVirtualCamera cvc)
     {
@@ -51,11 +56,12 @@ public class PlayerController : MonoBehaviourPun
 
     private void Update()
     {
-        if (!photonView.IsMine)
-        {
-            return;
-        }
 
+
+    }
+
+    public void CheckInput()
+    {
         m_Horizontal = Input.GetAxis("Horizontal");
         m_Vertical = Input.GetAxis("Vertical");
         m_MouseX = Input.GetAxis("Mouse X");

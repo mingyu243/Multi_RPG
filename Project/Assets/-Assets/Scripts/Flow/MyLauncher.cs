@@ -11,15 +11,6 @@ public class MyLauncher : MonoBehaviourPunCallbacks
     [SerializeField] TMP_InputField m_RoomName;
     [SerializeField] TMP_InputField m_NickName;
 
-    private void Awake()
-    {
-        PhotonNetwork.AutomaticallySyncScene = true;
-    }
-
-    private void Start()
-    {
-        PhotonNetwork.ConnectUsingSettings();
-    }
 
     public void JoinOrCreateRoom() // button event.
     {
@@ -28,7 +19,6 @@ public class MyLauncher : MonoBehaviourPunCallbacks
 
         PhotonNetwork.LocalPlayer.NickName = playerName;
 
-        PhotonNetwork.JoinOrCreateRoom(roomName, null, null);
     }
 
     #region 포톤 콜백 함수

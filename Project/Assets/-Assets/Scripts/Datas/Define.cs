@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Define : MonoBehaviour
+public class Define
 {
-    // Start is called before the first frame update
-    void Start()
+    public static class ResourceName
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public const string Manager = "@Manager";
     }
 }

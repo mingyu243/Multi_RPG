@@ -39,6 +39,11 @@ public class DirectJoinRoomOverlay : Overlay
         textField.labelElement.style.minWidth = 100;
         textField.style.minWidth = 100;
 
+        textField.RegisterValueChangedCallback(value =>
+        {
+            EditorPrefs.SetString(EDITOR_KEY_ROOM_NAME, value.newValue);
+        });
+
         return textField;
     }
     TextField CreateNickNameField()
@@ -46,6 +51,11 @@ public class DirectJoinRoomOverlay : Overlay
         TextField textField = new TextField("Nick Name");
         textField.labelElement.style.minWidth = 100;
         textField.style.minWidth = 100;
+
+        textField.RegisterValueChangedCallback(value =>
+        {
+            EditorPrefs.SetString(EDITOR_KEY_NICK_NAME, value.newValue);
+        });
 
         return textField;
     }
@@ -71,5 +81,8 @@ public class DirectJoinRoomOverlay : Overlay
         }
 
         EditorApplication.EnterPlaymode();
+
+        Managers.Network.SetNickName(EditorPrefs.GetString(EDITOR_KEY_ROOM_NAME, string.Empty));
+        Managers.Network.JoinOrCreateRoom(EditorPrefs.GetString(EDITOR_KEY_NICK_NAME, string.Empty));
     }
 }

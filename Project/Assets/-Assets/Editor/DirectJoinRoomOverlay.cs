@@ -83,6 +83,6 @@ public class DirectJoinRoomOverlay : Overlay
         EditorApplication.EnterPlaymode();
 
         Managers.Network.SetNickName(EditorPrefs.GetString(EDITOR_KEY_ROOM_NAME, string.Empty));
-        Managers.Network.JoinOrCreateRoom(EditorPrefs.GetString(EDITOR_KEY_NICK_NAME, string.Empty));
+        Managers.Network.JoinOrCreateRoom(EditorPrefs.GetString(EDITOR_KEY_NICK_NAME, string.Empty), true);
     }
 }

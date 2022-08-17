@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviourPun
 
     void Start()
     {
-        //GameInstance.Input.KeyAction -= CheckInput;
-        //GameInstance.Input.KeyAction += CheckInput;
+        Managers.Input.KeyAction -= CheckInput;
+        Managers.Input.KeyAction += CheckInput;
     }
 
     public void SetCamera(GameObject camera, CinemachineVirtualCamera cvc)

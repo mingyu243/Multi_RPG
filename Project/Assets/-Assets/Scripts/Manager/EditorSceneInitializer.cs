@@ -1,16 +1,21 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EditorSceneInitializer : MonoBehaviour
+public class EditorSceneInitializer : SingletonMono<EditorSceneInitializer>
 {
-    void Start()
-    {
-        
-    }
+    public string SceneName;
+    public string RoomName;
+    public string NickName;
+    public bool IsOffline;
 
-    void Update()
+    async UniTask Start()
     {
-        
+        Debug.Log($"NickName : {NickName}");
+        Debug.Log($"IsOffline : {IsOffline}");
+
+        await 
+
     }
 }

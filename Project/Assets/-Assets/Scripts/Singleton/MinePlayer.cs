@@ -4,10 +4,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCreator : MonoBehaviourPunCallbacks
+public class MinePlayer : SingletonMono<MinePlayer>
 {
     [SerializeField] GameObject m_Camera;
     [SerializeField] CinemachineVirtualCamera m_CVC;
+
+    InputManager _input = new InputManager();
+
+    public static InputManager Input { get { return Instance._input; } }
+
 
     void Start()
     {
@@ -18,10 +23,8 @@ public class PlayerCreator : MonoBehaviourPunCallbacks
         pc.OnPossess(c);
     }
 
-    public override void OnJoinedRoom()
+    private void Update()
     {
-        print("OnJoinedRoom");
-
-        PhotonNetwork.LoadLevel("BasicScene");
+        
     }
 }

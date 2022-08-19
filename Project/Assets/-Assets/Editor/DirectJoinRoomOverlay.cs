@@ -80,9 +80,17 @@ public class DirectJoinRoomOverlay : Overlay
             EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
         }
 
-        EditorApplication.EnterPlaymode();
+        var setup = new NewSceneSetup();
+        var _ = EditorSceneManager.NewScene(setup);
 
-        Managers.Network.SetNickName(EditorPrefs.GetString(EDITOR_KEY_ROOM_NAME, string.Empty));
-        Managers.Network.JoinOrCreateRoom(EditorPrefs.GetString(EDITOR_KEY_NICK_NAME, string.Empty), true);
+        GameObject go = EditorSceneInitializer.Instance.gameObject;
+        go.hideFlags = HideFlags.DontSaveInBuild;
+        EditorUtility.SetDirty(go);
+
+        EditorSceneInitializer.Instance.ScenePath = currentScene.path; 
+        EditorSceneInitializer.Instance.NickName = EditorPrefs.GetString(EDITOR_KEY_NICK_NAME, string.Empty);
+        EditorSceneInitializer.Instance.RoomName = EditorPrefs.GetString(EDITOR_KEY_ROOM_NAME, string.Empty);
+
+        EditorApplication.EnterPlaymode();
     }
 }

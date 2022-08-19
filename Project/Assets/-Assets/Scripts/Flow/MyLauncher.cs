@@ -14,6 +14,6 @@ public class MyLauncher : MonoBehaviour
     public void JoinOrCreateRoom() // button event.
     {
         Managers.Network.SetNickName(m_NickName.text);
-        Managers.Network.JoinOrCreateRoom(m_RoomName.text, false);
+        Managers.Network.JoinOrCreateRoom(m_RoomName.text);
     }
 }

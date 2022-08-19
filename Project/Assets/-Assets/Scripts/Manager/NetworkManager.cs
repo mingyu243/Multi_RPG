@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    [SerializeField] bool isConnectedToMaster;
+
     public void Init()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -21,11 +23,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinOrCreateRoom(roomName, null, null);
     }
+    public async UniTask JoinOrCreateRoomAsync(string roomName)
+    {
+        await UniTask.WaitUntil(() => isConnectedToMaster == true);
+        PhotonNetwork.JoinOrCreateRoom(roomName, null, null);
+    }
 
     #region 포톤 콜백 함수
 
     public override void OnConnectedToMaster()
     {
+        isConnectedToMaster = true;
         print("OnConnectedToMaster");
     }
 

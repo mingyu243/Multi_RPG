@@ -6,26 +6,36 @@ public class Managers : SingletonMono<Managers>
 {
     DataManager _data = new DataManager();
     ResourceManager _resource = new ResourceManager();
+    InputManager _input = new InputManager();
+    SceneManagerEx _scene = new SceneManagerEx();
+
     [SerializeField] NetworkManager _network;
+    [SerializeField] LocalPlayerManager _localPlayer;
 
     public static DataManager Data { get { return Instance._data; } }
     public static ResourceManager Resource { get { return Instance._resource; } }
+    public static InputManager Input { get { return Instance._input; } }
     public static NetworkManager Network { get { return Instance._network; } }
+    public static LocalPlayerManager LocalPlayer { get { return Instance._localPlayer; } }
+    public static SceneManagerEx Scene { get { return Instance._scene; } }
 
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
+
         if (Instance != null)
         {
-            _network = Instance.gameObject.AddComponent<NetworkManager>();
+            _network = this.gameObject.AddComponent<NetworkManager>();
+            _localPlayer = this.gameObject.AddComponent<LocalPlayerManager>();
 
             //_data.Init();
-            _network.Init();
         }
     }
 
-    void Start()
+    private void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        _network.Init();
+        _localPlayer.Init();
     }
 
     void Update()

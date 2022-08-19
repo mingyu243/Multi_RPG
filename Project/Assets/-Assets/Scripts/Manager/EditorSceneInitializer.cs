@@ -5,17 +5,22 @@ using UnityEngine;
 
 public class EditorSceneInitializer : SingletonMono<EditorSceneInitializer>
 {
-    public string SceneName;
+    public string ScenePath;
     public string RoomName;
     public string NickName;
     public bool IsOffline;
 
-    async UniTask Start()
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+    async UniTaskVoid Start()
     {
         Debug.Log($"NickName : {NickName}");
         Debug.Log($"IsOffline : {IsOffline}");
 
-        await 
-
+        Managers.Network.SetNickName(NickName);
+        await Managers.Network.JoinOrCreateRoomAsync(RoomName);
     }
 }

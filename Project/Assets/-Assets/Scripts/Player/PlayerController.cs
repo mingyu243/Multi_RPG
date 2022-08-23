@@ -38,12 +38,22 @@ public class PlayerController : MonoBehaviourPun
 
     void Start()
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+
         Managers.Input.KeyAction -= CheckInput;
         Managers.Input.KeyAction += CheckInput;
     }
 
     public void SetCamera(GameObject camera, CinemachineVirtualCamera cvc)
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+
         m_Cam = camera.transform;
 
         cvc.Follow = m_CameraFollowTarget.transform;
@@ -70,26 +80,26 @@ public class PlayerController : MonoBehaviourPun
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            m_Character.PlayRoll();
+            m_Character?.PlayRoll();
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            m_Character.PlayJump();
+            m_Character?.PlayJump();
         }
     }
 
     private void FixedUpdate()
     {
-        //if (!photonView.IsMine)
-        //{
-        //    return;
-        //}
+        if (!photonView.IsMine)
+        {
+            return;
+        }
 
         // 캐릭터 이동.
-        m_Character.Move(m_PlayerMovementInput);
+        m_Character?.Move(m_PlayerMovementInput);
 
         // 카메라 타겟 위치를 캐릭터 위치로 옮기기.
-        m_CameraFollowTarget.Follow(m_Character.transform.position);
-        m_CameraFollowTarget.Rotate(m_PlayerMouseInput);
+        m_CameraFollowTarget?.Follow(m_Character.transform.position);
+        m_CameraFollowTarget?.Rotate(m_PlayerMouseInput);
     }
 }

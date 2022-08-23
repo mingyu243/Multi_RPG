@@ -7,6 +7,8 @@ using UnityEngine;
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] bool isConnectedToMaster;
+    
+    public bool IsConnect { get { return isConnectedToMaster; } }
 
     public void Init()
     {

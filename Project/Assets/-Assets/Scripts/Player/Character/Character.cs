@@ -40,7 +40,8 @@ public class Character : MonoBehaviour
             return;
         }
 
-        DirectRotate();
+        DirectRotate(); // 원하는 방향으로 즉시 회전.
+
         m_Rigidbody.AddForce(transform.forward * m_RollPower + Vector3.up * -Physics.gravity.y, ForceMode.Impulse);
         m_AnimationController.Roll();
     }

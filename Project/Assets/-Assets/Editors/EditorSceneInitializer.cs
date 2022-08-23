@@ -1,11 +1,9 @@
-﻿using Cysharp.Threading.Tasks;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+
+using Cysharp.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EditorSceneInitializer : SingletonMono<EditorSceneInitializer>
 {
@@ -38,23 +36,14 @@ public class EditorSceneInitializer : SingletonMono<EditorSceneInitializer>
         }
     }
 
-    async UniTaskVoid Start()
+    void Start()
     {
         Debug.Log($"NickName : {NickName}");
         Debug.Log($"IsOffline : {IsOffline}");
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
         Managers.Network.SetNickName(NickName);
-        await Managers.Network.JoinOrCreateRoomAsync(RoomName);
-    }
-
-    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-
-        Managers.LocalPlayer.CreatePlayerController();
-        Managers.LocalPlayer.CreateCharacter();
-        Managers.LocalPlayer.SetPossess();
+        Managers.Network.JoinOrCreateRoomAsync(RoomName).Forget();
     }
 }
+
+#endif

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Cysharp.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class MyLauncher : MonoBehaviour
 {
@@ -14,6 +16,6 @@ public class MyLauncher : MonoBehaviour
     public void JoinOrCreateRoom() // button event.
     {
         Managers.Network.SetNickName(m_NickName.text);
-        Managers.Network.JoinOrCreateRoom(m_RoomName.text);
+        Managers.Network.JoinOrCreateRoomAsync(m_RoomName.text).Forget();
     }
 }

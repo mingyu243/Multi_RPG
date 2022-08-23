@@ -18,7 +18,7 @@ public class LocalPlayerManager
 
     public void CreatePlayerController()
     {
-        GameObject pc = Managers.Resource.Instantiate("PlayerController");
+        GameObject pc = Managers.Network.Instantiate("PlayerController");
         Object.DontDestroyOnLoad(pc);
 
         playerController = pc.GetComponent<PlayerController>();

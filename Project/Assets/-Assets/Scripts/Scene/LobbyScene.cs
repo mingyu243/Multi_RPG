@@ -9,6 +9,13 @@ public class LobbyScene : BaseScene
         base.Init();
 
         SceneType = Define.Scene.Lobby;
+
+        if (Managers.Network.IsConnect)
+        {
+            Managers.LocalPlayer.CreatePlayerController();
+            Managers.LocalPlayer.CreateCharacter();
+            Managers.LocalPlayer.SetPossess();
+        }
     }
 
     public override void Clear()

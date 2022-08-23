@@ -8,9 +8,9 @@ public class Managers : SingletonMono<Managers>
     ResourceManager _resource = new ResourceManager();
     InputManager _input = new InputManager();
     SceneManagerEx _scene = new SceneManagerEx();
+    LocalPlayerManager _localPlayer = new LocalPlayerManager();
 
     [SerializeField] NetworkManager _network;
-    [SerializeField] LocalPlayerManager _localPlayer;
 
     public static DataManager Data { get { return Instance._data; } }
     public static ResourceManager Resource { get { return Instance._resource; } }
@@ -26,7 +26,6 @@ public class Managers : SingletonMono<Managers>
         if (Instance != null)
         {
             _network = this.gameObject.AddComponent<NetworkManager>();
-            _localPlayer = this.gameObject.AddComponent<LocalPlayerManager>();
 
             //_data.Init();
         }

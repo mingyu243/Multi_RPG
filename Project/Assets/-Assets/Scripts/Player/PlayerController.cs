@@ -57,7 +57,6 @@ public class PlayerController : MonoBehaviourPun
     private void Update()
     {
 
-
     }
 
     public void CheckInput()
@@ -81,10 +80,10 @@ public class PlayerController : MonoBehaviourPun
 
     private void FixedUpdate()
     {
-        if (!photonView.IsMine)
-        {
-            return;
-        }
+        //if (!photonView.IsMine)
+        //{
+        //    return;
+        //}
 
         // 캐릭터 이동.
         m_Character.Move(m_PlayerMovementInput);

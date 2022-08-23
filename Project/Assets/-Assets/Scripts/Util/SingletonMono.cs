@@ -18,7 +18,7 @@ public abstract class SingletonMono<T> : MonoBehaviour where T : MonoBehaviour
             {
                 string name = $"@{typeof(T).Name}";
                 go = new GameObject(name);
-                
+
                 go.AddComponent<T>();
             }
 

@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+Ôªøusing Cysharp.Threading.Tasks;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +29,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinOrCreateRoom(roomName, null, null);
     }
 
-    #region ∆˜≈Ê ƒ›πÈ «‘ºˆ
+    public void LoadScene(string sceneName)
+    {
+        PhotonNetwork.LoadLevel(sceneName);
+    }
+
+    public GameObject Instantiate(string path, Transform parent = null)
+    {
+        GameObject go = PhotonNetwork.Instantiate($"Prefabs/{path}", Vector3.zero, Quaternion.identity);
+        go.transform.SetParent(parent);
+
+        return go;
+    }
+
+    #region Ìè¨ÌÜ§ ÏΩúÎ∞± Ìï®Ïàò
 
     public override void OnConnectedToMaster()
     {
@@ -46,7 +59,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         print("OnJoinedRoom");
 
-        PhotonNetwork.LoadLevel("BasicScene");
+        Managers.Scene.LoadScene(Define.Scene.Lobby);
     }
 
     #endregion

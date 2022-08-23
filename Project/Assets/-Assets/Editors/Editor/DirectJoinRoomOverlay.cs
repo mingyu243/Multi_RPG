@@ -75,7 +75,8 @@ public class DirectJoinRoomOverlay : Overlay
     void LoadEditorScene()
     {
         Scene currentScene = EditorSceneManager.GetActiveScene();
-        if(EditorSceneManager.GetActiveScene().isDirty)
+        string scenePath = currentScene.path;
+        if (EditorSceneManager.GetActiveScene().isDirty)
         {
             EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
         }
@@ -87,7 +88,7 @@ public class DirectJoinRoomOverlay : Overlay
         go.hideFlags = HideFlags.DontSaveInBuild;
         EditorUtility.SetDirty(go);
 
-        EditorSceneInitializer.Instance.ScenePath = currentScene.path; 
+        EditorSceneInitializer.Instance.ScenePath = scenePath; 
         EditorSceneInitializer.Instance.NickName = EditorPrefs.GetString(EDITOR_KEY_NICK_NAME, string.Empty);
         EditorSceneInitializer.Instance.RoomName = EditorPrefs.GetString(EDITOR_KEY_ROOM_NAME, string.Empty);
 

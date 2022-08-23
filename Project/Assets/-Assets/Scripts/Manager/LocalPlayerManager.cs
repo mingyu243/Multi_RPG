@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LocalPlayerManager : MonoBehaviour
+public class LocalPlayerManager
 {
     public PlayerController playerController;
     public Character character;
@@ -14,18 +14,27 @@ public class LocalPlayerManager : MonoBehaviour
 
     public void Init()
     {
-        GameObject go_pc = Managers.Resource.Instantiate("PlayerController");
-        DontDestroyOnLoad(go_pc);
-        PlayerController pc = go_pc.GetComponent<PlayerController>();
+    }
 
-        GameObject go_c = Managers.Resource.Instantiate("Character");
-        DontDestroyOnLoad(go_c);
-        Character c = go_c.GetComponent<Character>();
+    public void CreatePlayerController()
+    {
+        GameObject pc = Managers.Resource.Instantiate("PlayerController");
+        Object.DontDestroyOnLoad(pc);
 
+        playerController = pc.GetComponent<PlayerController>();
+    }
+
+    public void CreateCharacter()
+    {
+        character = Managers.Network.Instantiate("Character").GetComponent<Character>();
+    }
+
+    public void SetPossess()
+    {
         m_Camera = Camera.main.gameObject;
         m_CVC = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
 
-        pc.SetCamera(m_Camera, m_CVC);
-        pc.OnPossess(c);
+        playerController.SetCamera(m_Camera, m_CVC);
+        playerController.OnPossess(character);
     }
 }

@@ -1,11 +1,12 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public abstract class BaseScene : MonoBehaviour
 {
-    public Define.Scene SceneType { get; protected set; } = Define.Scene.Unknown;
+    [Header("Automatic Initialize")]
+    public Define.Scene SceneType = Define.Scene.Unknown;
 
     private void Awake()
     {
@@ -14,7 +15,7 @@ public abstract class BaseScene : MonoBehaviour
 
     protected virtual void Init()
     {
-        // UI¥¬ µ˚∑Œ æ¿ ∫–∏Æ«“ ∞≈∂Ûº≠.
+        // UIÎäî Îî∞Î°ú Ïî¨ Î∂ÑÎ¶¨Ìï† Í±∞ÎùºÏÑú.
         //Object obj = GameObject.FindObjectOfType(typeof(EventSystem));
         //if(obj == null)
         //{

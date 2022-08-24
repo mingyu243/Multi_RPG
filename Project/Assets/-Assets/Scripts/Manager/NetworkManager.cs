@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine;
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] bool isConnectedToMaster;
-    
+
     public bool IsConnect { get { return isConnectedToMaster; } }
 
     public void Init()
@@ -33,7 +34,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void LoadScene(string sceneName)
     {
-        PhotonNetwork.LoadLevel(sceneName);
+        // MasterClient만 호출해야 함.
+        // AutomaticallySyncScene = true 설정으로 이후에 들어오는 사람도 자동으로 이동함.
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel(sceneName);
+        }
     }
 
     public GameObject Instantiate(string path, Transform parent = null)
@@ -62,6 +68,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         print("OnJoinedRoom");
 
         Managers.Scene.LoadScene(Define.Scene.Lobby);
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        print($"OnPlayerEnteredRoom : {newPlayer.NickName}");
     }
 
     #endregion

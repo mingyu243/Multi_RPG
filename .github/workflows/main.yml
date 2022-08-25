@@ -1,5 +1,8 @@
 name: Build project
 
+on:
+  push:
+
 jobs:
   buildForStandaloneWindowsPlatform:
     name: Build for ${{ matrix.targetPlatform }}
@@ -25,6 +28,7 @@ jobs:
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
           customParameters: -BuildOptions CompressWithLz4
+          projectPath: Project/
 
       - uses: actions/upload-artifact@v2
         with:

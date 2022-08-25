@@ -12,9 +12,10 @@ public class LobbyScene : BaseScene
 
         if (Managers.Network.IsConnect)
         {
-            Managers.LocalPlayer.CreatePlayerController();
-            Managers.LocalPlayer.CreateCharacter();
-            Managers.LocalPlayer.SetPossess();
+            Managers.LocalPlayer.PlayerController = Managers.LocalPlayer.CreatePlayerController();
+            Managers.LocalPlayer.PlayerController.OnPossess(Managers.LocalPlayer.CreateCharacter());
+            ;
+            Managers.LocalPlayer.SetCamera();
         }
     }
 

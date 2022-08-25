@@ -45,9 +45,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public GameObject Instantiate(string path, Transform parent = null)
     {
         GameObject go = PhotonNetwork.Instantiate($"Prefabs/{path}", Vector3.zero, Quaternion.identity);
-        go.transform.SetParent(parent);
+   //     go.transform.SetParent(parent);
 
         return go;
+    }
+
+    public PhotonView GetPhotonView(int viewID)
+    {
+        return PhotonNetwork.GetPhotonView(viewID);
     }
 
     #region 포톤 콜백 함수

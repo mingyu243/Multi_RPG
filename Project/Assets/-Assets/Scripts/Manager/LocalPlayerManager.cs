@@ -6,22 +6,24 @@ using UnityEngine;
 
 public class LocalPlayerManager
 {
-    public PlayerController playerController;
-    public Character character;
+    PlayerController _playerController;
 
-    [SerializeField] GameObject m_Camera;
-    [SerializeField] CinemachineVirtualCamera m_CVC;
+    GameObject _camera;
+    CinemachineVirtualCamera _cvc;
+
+    public PlayerController PlayerController 
+    { 
+        get { return _playerController; } 
+        set { _playerController = value; } 
+    }
 
     public void Init()
     {
     }
 
-    public void CreatePlayerController()
+    public PlayerController CreatePlayerController()
     {
-        GameObject pc = Managers.Network.Instantiate("PlayerController");
-        Object.DontDestroyOnLoad(pc);
-
-        playerController = pc.GetComponent<PlayerController>();
+        return Managers.Network.Instantiate("PlayerController").GetComponent<PlayerController>();
     }
 
     public void CreateCharacter()
@@ -29,12 +31,16 @@ public class LocalPlayerManager
         character = Managers.Network.Instantiate("Character").GetComponent<Character>();
     }
 
-    public void SetPossess()
+    public void OnPossess(Character character)
+    {
+        playerController.OnPossess(character);
+    }
+
+    public void SetCamera()
     {
         m_Camera = Camera.main.gameObject;
         m_CVC = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
 
         playerController.SetCamera(m_Camera, m_CVC);
-        playerController.OnPossess(character);
     }
 }

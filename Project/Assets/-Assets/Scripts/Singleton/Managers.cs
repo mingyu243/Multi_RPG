@@ -9,6 +9,8 @@ public class Managers : SingletonMono<Managers>
     InputManager _input = new InputManager();
     SceneManagerEx _scene = new SceneManagerEx();
     LocalPlayerManager _localPlayer = new LocalPlayerManager();
+    GamePlayManager _gamePlay = new GamePlayManager();
+
 
     [SerializeField] NetworkManager _network;
 
@@ -18,6 +20,7 @@ public class Managers : SingletonMono<Managers>
     public static NetworkManager Network { get { return Instance._network; } }
     public static LocalPlayerManager LocalPlayer { get { return Instance._localPlayer; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }
+    public static GamePlayManager GamePlay { get { return Instance._gamePlay; } }
 
     private void Awake()
     {

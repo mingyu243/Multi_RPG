@@ -19,7 +19,7 @@ using Cinemachine;
 /// + https://velog.io/@minjujuu/Unity-%ED%8F%AC%ED%86%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC
 /// 
 /// </summary>
-public class PlayerController : MonoBehaviourPun
+public class PlayerController : MonoBehaviourPun, IPunObservable, IPunInstantiateMagicCallback
 {
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
     [SerializeField] Transform m_Cam;
@@ -61,7 +61,13 @@ public class PlayerController : MonoBehaviourPun
 
     public void OnPossess(Character character)
     {
-        m_Character = character;
+        if (photonView.IsMine) photonView.RPC("OnPossessRPC", RpcTarget.AllBuffered, character.photonView.ViewID);
+    }
+
+    [PunRPC]
+    void OnPossessRPC(int viewID)
+    {
+        m_Character = Managers.Network.GetPhotonView(viewID).GetComponent<Character>();
     }
 
     private void Update()
@@ -101,5 +107,15 @@ public class PlayerController : MonoBehaviourPun
         // 카메라 타겟 위치를 캐릭터 위치로 옮기기.
         m_CameraFollowTarget?.Follow(m_Character.transform.position);
         m_CameraFollowTarget?.Rotate(m_PlayerMouseInput);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        Managers.GamePlay.AddPlayerController(this);
     }
 }

@@ -1,39 +1,39 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    [Header("Automatic Initialize")] // Ω∫≈©∏≥∆Æø°º≠ ¿⁄µø¿∏∑Œ √ ±‚»≠.
-    [SerializeField] Animator m_Animator;
+    [Header("Automatic Initialize")] // Ïä§ÌÅ¨Î¶ΩÌä∏ÏóêÏÑú ÏûêÎèôÏúºÎ°ú Ï¥àÍ∏∞Ìôî.
+    [SerializeField] Animator _animator;
 
     void Start()
     {
-        m_Animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     public void Move(float forwardPower)
     {
-        m_Animator.SetFloat("DIRECTION_FORWARD", forwardPower);
+        _animator.SetFloat("DIRECTION_FORWARD", forwardPower);
     }
 
     public void Roll()
     {
-        m_Animator.SetTrigger("ROLL");
+        _animator.SetTrigger("ROLL");
     }
 
     public void Jump()
     {
-        m_Animator.SetTrigger("JUMP");
+        _animator.SetTrigger("JUMP");
     }
 
     public void OnGrounded(bool onGrounded)
     {
-        m_Animator.SetBool("ON_GROUNDED", onGrounded);
+        _animator.SetBool("ON_GROUNDED", onGrounded);
     }
 
     public bool IsRolling()
     {
-        return m_Animator.GetBool("IS_ROLLING");
+        return _animator.GetBool("IS_ROLLING");
     }
 }

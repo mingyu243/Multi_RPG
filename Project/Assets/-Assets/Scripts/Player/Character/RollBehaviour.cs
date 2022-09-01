@@ -1,13 +1,13 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RollBehaviour : StateMachineBehaviour
 {
     /// <summary>
-    /// [Âü°í]
-    /// ¿ø·¡´Â GetComponent ScriptÇØ¼­ º¯¼ö¸¦ ¹Ù²Ù·Á ÇßÀ¸³ª,
-    /// animator parameter·Î °ü¸®ÇÏ´Â °Ô ´õ ÆíÇÒ °Í °°¾Æ¼­ ÀÌ·¸°Ô »ç¿ëÇÔ.
+    /// [ì°¸ê³ ]
+    /// ì›ë˜ëŠ” GetComponent Scriptí•´ì„œ ë³€ìˆ˜ë¥¼ ë°”ê¾¸ë ¤ í–ˆìœ¼ë‚˜,
+    /// animator parameterë¡œ ê´€ë¦¬í•˜ëŠ” ê²Œ ë” í¸í•  ê²ƒ ê°™ì•„ì„œ ì´ë ‡ê²Œ ì‚¬ìš©í•¨.
     /// 
     /// https://forum.unity.com/threads/how-to-get-references-to-gameobjects-from-inside-a-state-machine-behaviour-script.890935/
     /// </summary>

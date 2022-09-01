@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] bool isConnectedToMaster;
+    [SerializeField] bool _isConnectedToMaster;
 
-    public bool IsConnect { get { return isConnectedToMaster; } }
+    public bool IsConnect { get { return _isConnectedToMaster; } }
 
     public void Init()
     {
@@ -28,7 +28,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     public async UniTask JoinOrCreateRoomAsync(string roomName)
     {
-        await UniTask.WaitUntil(() => isConnectedToMaster == true);
+        await UniTask.WaitUntil(() => _isConnectedToMaster == true);
         PhotonNetwork.JoinOrCreateRoom(roomName, null, null);
     }
 
@@ -59,7 +59,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        isConnectedToMaster = true;
+        _isConnectedToMaster = true;
         print("OnConnectedToMaster");
     }
 

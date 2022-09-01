@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class FocusedTargetByCamera : MonoBehaviour
 {
-    [SerializeField] float m_RotateSpeed = 5;
+    [SerializeField] float _rotateSpeed = 5;
 
     private float yaw;
 
@@ -22,7 +22,7 @@ public class FocusedTargetByCamera : MonoBehaviour
     /// </summary>
     public void Rotate(Vector3 rotate)
     {
-        yaw += m_RotateSpeed * rotate.x;
+        yaw += _rotateSpeed * rotate.x;
 
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, yaw, 0.0f);
 

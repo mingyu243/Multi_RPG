@@ -6,32 +6,32 @@ using UnityEngine;
 public class Character : MonoBehaviourPun
 {
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
-    [SerializeField] Rigidbody m_Rigidbody;
-    [SerializeField] AnimationController m_AnimationController;
+    [SerializeField] Rigidbody _rigidbody;
+    [SerializeField] AnimationController _animationController;
 
     [Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
-    [SerializeField] LayerMask m_CheckOnGroundedLayer;
+    [SerializeField] LayerMask _checkOnGroundedLayer;
 
     [Header("Inputs")] // 입력받은 값.
-    [SerializeField] Vector3 m_InputMove;
-    [SerializeField] Vector3 m_MoveXZ;
-    [SerializeField] float m_ForwardPower;
+    [SerializeField] Vector3 _inputMove;
+    [SerializeField] Vector3 _moveXZ;
+    [SerializeField] float _forwardPower;
 
     [Header("Stats")] // 능력. 
-    [SerializeField] float m_MoveSpeed = 7;
-    [SerializeField] float m_JumpPower = 12;
-    [SerializeField] float m_RollPower = 12;
-    [SerializeField] float m_CheckOnGroundedLength = 0.3f;
+    [SerializeField] float _moveSpeed = 7;
+    [SerializeField] float _jumpPower = 12;
+    [SerializeField] float _rollPower = 12;
+    [SerializeField] float _checkOnGroundedLength = 0.3f;
 
     [Header("States")] // 상태.
-    [SerializeField] bool m_IsRolling;
-    [SerializeField] bool m_OnGrounded;
+    [SerializeField] bool _isRolling;
+    [SerializeField] bool _onGrounded;
 
     void Start()
     {
-        m_Rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
 
-        m_AnimationController = GetComponent<AnimationController>();
+        _animationController = GetComponent<AnimationController>();
     }
 
     public void PlayRoll()
@@ -43,8 +43,8 @@ public class Character : MonoBehaviourPun
 
         DirectRotate(); // 원하는 방향으로 즉시 회전.
 
-        m_Rigidbody.AddForce(transform.forward * m_RollPower + Vector3.up * -Physics.gravity.y, ForceMode.Impulse);
-        m_AnimationController.Roll();
+        _rigidbody.AddForce(transform.forward * _rollPower + Vector3.up * -Physics.gravity.y, ForceMode.Impulse);
+        _animationController.Roll();
     }
     public void PlayJump()
     {
@@ -53,58 +53,58 @@ public class Character : MonoBehaviourPun
             return;
         }
         
-        m_Rigidbody.AddForce(Vector3.up * m_JumpPower, ForceMode.Impulse);
-        m_AnimationController.Jump();
+        _rigidbody.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
+        _animationController.Jump();
     }
 
     private void Update()
     {
-        m_OnGrounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, m_CheckOnGroundedLength, m_CheckOnGroundedLayer);
-        m_AnimationController.OnGrounded(m_OnGrounded);
+        _onGrounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, _checkOnGroundedLength, _checkOnGroundedLayer);
+        _animationController.OnGrounded(_onGrounded);
 
-        m_IsRolling = m_AnimationController.IsRolling();
+        _isRolling = _animationController.IsRolling();
     }
 
     public void Move(Vector3 inputMove)
     {
-        m_InputMove = inputMove;
+        _inputMove = inputMove;
 
         // 앞으로 가는 속력 구하기.
-        m_ForwardPower = Mathf.Clamp(m_InputMove.magnitude, 0, 1); // 대각선으로 갈 때, 빨라지는 것을 방지.
-        m_AnimationController.Move(m_ForwardPower);
+        _forwardPower = Mathf.Clamp(_inputMove.magnitude, 0, 1); // 대각선으로 갈 때, 빨라지는 것을 방지.
+        _animationController.Move(_forwardPower);
 
         // 이동하기.
-        if ((m_ForwardPower > 0) && CanMove())
+        if ((_forwardPower > 0) && CanMove())
         {
-            m_MoveXZ = new Vector3(m_InputMove.x, 0, m_InputMove.z); // Y축을 제외한 방향 구하기.
-            m_MoveXZ.Normalize();
+            _moveXZ = new Vector3(_inputMove.x, 0, _inputMove.z); // Y축을 제외한 방향 구하기.
+            _moveXZ.Normalize();
 
             //transform.position += (m_MoveXZ * m_MoveSpeed) * m_ForwardPower * Time.deltaTime;
-            m_Rigidbody.MovePosition(transform.position + (m_MoveXZ * m_MoveSpeed) * m_ForwardPower * Time.deltaTime);
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_MoveXZ), 0.3f);
+            _rigidbody.MovePosition(transform.position + (_moveXZ * _moveSpeed) * _forwardPower * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_moveXZ), 0.3f);
         }
     }
 
     private void DirectRotate()
     {
-        if (m_MoveXZ.sqrMagnitude > 0)
+        if (_moveXZ.sqrMagnitude > 0)
         {
-            transform.rotation = Quaternion.LookRotation(m_MoveXZ);
+            transform.rotation = Quaternion.LookRotation(_moveXZ);
         }
     }
 
     private bool CanMove()
     {
-        return (m_IsRolling == false);
+        return (_isRolling == false);
     }
 
     private bool CanRoll()
     {
-        return (m_IsRolling == false);
+        return (_isRolling == false);
     }
 
     private bool CanJump()
     {
-        return (m_OnGrounded == true);
+        return (_onGrounded == true);
     }
 }

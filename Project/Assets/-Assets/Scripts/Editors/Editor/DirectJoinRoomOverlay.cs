@@ -10,16 +10,16 @@ using UnityEngine.UIElements;
 [Overlay(typeof(SceneView), "Test/Direct Join Room Tools")]
 public class DirectJoinRoomOverlay : Overlay
 {
-    VisualElement m_Root;
+    VisualElement _root;
 
     const string EDITOR_KEY_ROOM_NAME = "editor_key_room_name";
     const string EDITOR_KEY_NICK_NAME = "eidtor_key_nick_name";
 
     public override VisualElement CreatePanelContent()
     {
-        m_Root = new VisualElement();
-        m_Root.Add(CreateRoomNameField());
-        m_Root.Add(CreateNickNameField());
+        _root = new VisualElement();
+        _root.Add(CreateRoomNameField());
+        _root.Add(CreateNickNameField());
 
         VisualElement btnRoot = new VisualElement();
         btnRoot.style.backgroundColor = Color.white;
@@ -28,9 +28,9 @@ public class DirectJoinRoomOverlay : Overlay
 
         btnRoot.Add(CreatePlayButton());
 
-        m_Root.Add(btnRoot);
+        _root.Add(btnRoot);
 
-        return m_Root;
+        return _root;
     }
 
     TextField CreateRoomNameField()

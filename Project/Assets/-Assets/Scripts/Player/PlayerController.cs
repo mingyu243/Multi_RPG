@@ -22,24 +22,24 @@ using Cinemachine;
 public class PlayerController : MonoBehaviourPun, IPunObservable, IPunInstantiateMagicCallback
 {
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
-    [SerializeField] Transform m_Cam;
-    [SerializeField] Character m_Character;
+    [SerializeField] Transform _cam;
+    [SerializeField] Character _character;
 
     [Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
-    [SerializeField] FocusedTargetByCamera m_CameraFollowTarget;
+    [SerializeField] FocusedTargetByCamera _cameraFollowTarget;
 
     [Header("Inputs")]
-    [SerializeField] float m_Horizontal; // 수평. (좌우)
-    [SerializeField] float m_Vertical; // 수직. (위아래)
-    [SerializeField] float m_MouseX; // 마우스 좌우.
+    [SerializeField] float _horizontal; // 수평. (좌우)
+    [SerializeField] float _vertical; // 수직. (위아래)
+    [SerializeField] float _mouseX; // 마우스 좌우.
 
-    [SerializeField] Vector3 m_PlayerMovementInput;
-    [SerializeField] Vector3 m_PlayerMouseInput;
+    [SerializeField] Vector3 _playerMovementInput;
+    [SerializeField] Vector3 _playerMouseInput;
 
     public Character Character
     {
-        get { return m_Character; }
-        set { m_Character = value; }
+        get { return _character; }
+        set { _character = value; }
     }
 
     void Start()
@@ -60,9 +60,9 @@ public class PlayerController : MonoBehaviourPun, IPunObservable, IPunInstantiat
             return;
         }
 
-        m_Cam = camera.transform;
+        _cam = camera.transform;
 
-        cvc.Follow = m_CameraFollowTarget.transform;
+        cvc.Follow = _cameraFollowTarget.transform;
     }
 
     public void OnPossess(Character character)
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable, IPunInstantiat
     [PunRPC]
     void OnPossessRPC(int viewID)
     {
-        m_Character = Managers.Network.GetPhotonView(viewID).GetComponent<Character>();
+        _character = Managers.Network.GetPhotonView(viewID).GetComponent<Character>();
     }
 
     private void Update()
@@ -83,20 +83,20 @@ public class PlayerController : MonoBehaviourPun, IPunObservable, IPunInstantiat
 
     public void CheckInput()
     {
-        m_Horizontal = Input.GetAxis("Horizontal");
-        m_Vertical = Input.GetAxis("Vertical");
-        m_MouseX = Input.GetAxis("Mouse X");
+        _horizontal = Input.GetAxis("Horizontal");
+        _vertical = Input.GetAxis("Vertical");
+        _mouseX = Input.GetAxis("Mouse X");
 
-        m_PlayerMovementInput = (m_Vertical * m_Cam.forward) + (m_Horizontal * m_Cam.right);
-        m_PlayerMouseInput = new Vector2(m_MouseX, 0);
+        _playerMovementInput = (_vertical * _cam.forward) + (_horizontal * _cam.right);
+        _playerMouseInput = new Vector2(_mouseX, 0);
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            m_Character?.PlayRoll();
+            _character?.PlayRoll();
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            m_Character?.PlayJump();
+            _character?.PlayJump();
         }
     }
 
@@ -108,11 +108,11 @@ public class PlayerController : MonoBehaviourPun, IPunObservable, IPunInstantiat
         }
 
         // 캐릭터 이동.
-        m_Character?.Move(m_PlayerMovementInput);
+        _character?.Move(_playerMovementInput);
 
         // 카메라 타겟 위치를 캐릭터 위치로 옮기기.
-        m_CameraFollowTarget?.Follow(m_Character.transform.position);
-        m_CameraFollowTarget?.Rotate(m_PlayerMouseInput);
+        _cameraFollowTarget?.Follow(_character.transform.position);
+        _cameraFollowTarget?.Rotate(_playerMouseInput);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

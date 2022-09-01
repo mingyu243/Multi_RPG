@@ -10,12 +10,12 @@ using UnityEngine.SceneManagement;
 
 public class MyLauncher : MonoBehaviour
 {
-    [SerializeField] TMP_InputField m_RoomName;
-    [SerializeField] TMP_InputField m_NickName;
+    [SerializeField] TMP_InputField _roomName;
+    [SerializeField] TMP_InputField _nickName;
 
     public void JoinOrCreateRoom() // button event.
     {
-        Managers.Network.SetNickName(m_NickName.text);
-        Managers.Network.JoinOrCreateRoomAsync(m_RoomName.text).Forget();
+        Managers.Network.SetNickName(_nickName.text);
+        Managers.Network.JoinOrCreateRoomAsync(_roomName.text).Forget();
     }
 }

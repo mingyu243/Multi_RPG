@@ -36,6 +36,12 @@ public class PlayerController : MonoBehaviourPun, IPunObservable, IPunInstantiat
     [SerializeField] Vector3 m_PlayerMovementInput;
     [SerializeField] Vector3 m_PlayerMouseInput;
 
+    public Character Character
+    {
+        get { return m_Character; }
+        set { m_Character = value; }
+    }
+
     void Start()
     {
         if (!photonView.IsMine)

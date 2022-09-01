@@ -16,6 +16,10 @@ public class LocalPlayerManager
         get { return _playerController; } 
         set { _playerController = value; } 
     }
+    public Character Character
+    {
+        get { return _playerController.Character; }
+    }
 
     public void Init()
     {
@@ -26,21 +30,21 @@ public class LocalPlayerManager
         return Managers.Network.Instantiate("PlayerController").GetComponent<PlayerController>();
     }
 
-    public void CreateCharacter()
+    public Character CreateCharacter()
     {
-        character = Managers.Network.Instantiate("Character").GetComponent<Character>();
+        return Managers.Network.Instantiate("Character").GetComponent<Character>();
     }
 
     public void OnPossess(Character character)
     {
-        playerController.OnPossess(character);
+        _playerController.OnPossess(character);
     }
 
     public void SetCamera()
     {
-        m_Camera = Camera.main.gameObject;
-        m_CVC = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+        _camera = Camera.main.gameObject;
+        _cvc = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
 
-        playerController.SetCamera(m_Camera, m_CVC);
+        _playerController.SetCamera(_camera, _cvc);
     }
 }

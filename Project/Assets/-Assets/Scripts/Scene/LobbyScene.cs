@@ -14,7 +14,6 @@ public class LobbyScene : BaseScene
         {
             Managers.LocalPlayer.PlayerController = Managers.LocalPlayer.CreatePlayerController();
             Managers.LocalPlayer.PlayerController.OnPossess(Managers.LocalPlayer.CreateCharacter());
-            ;
             Managers.LocalPlayer.SetCamera();
         }
     }

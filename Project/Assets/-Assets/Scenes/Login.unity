@@ -1606,8 +1606,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2dbb67bbaf26b24e95d58995b3d45df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RoomName: {fileID: 413040268}
-  m_NickName: {fileID: 372638327}
+  _roomName: {fileID: 413040268}
+  _nickName: {fileID: 372638327}
 --- !u!1 &1711482202
 GameObject:
   m_ObjectHideFlags: 0

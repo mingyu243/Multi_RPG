@@ -6,8 +6,11 @@ public class Managers : SingletonMono<Managers>
 {
     DataManager _data = new DataManager();
     ResourceManager _resource = new ResourceManager();
+    
     InputManager _input = new InputManager();
     SceneManagerEx _scene = new SceneManagerEx();
+
+    CameraManager _camera = new CameraManager();
     LocalPlayerManager _localPlayer = new LocalPlayerManager();
     GamePlayManager _gamePlay = new GamePlayManager();
 
@@ -18,6 +21,7 @@ public class Managers : SingletonMono<Managers>
     public static ResourceManager Resource { get { return Instance._resource; } }
     public static InputManager Input { get { return Instance._input; } }
     public static NetworkManager Network { get { return Instance._network; } }
+    public static CameraManager Camera { get { return Instance._camera; } }
     public static LocalPlayerManager LocalPlayer { get { return Instance._localPlayer; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }
     public static GamePlayManager GamePlay { get { return Instance._gamePlay; } }

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public abstract class SingletonMono<T> : MonoBehaviour where T : MonoBehaviour
 
     static void Init()
     {
-        if (s_instance == null)
+        if (s_instance == null) 
         {
             T find = GameObject.FindObjectOfType<T>();
             GameObject go = find?.gameObject;

@@ -1,50 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &472355269
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 472355270}
-  - component: {fileID: 472355271}
-  m_Layer: 0
-  m_Name: FocusedTargetByCamera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &472355270
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 472355269}
-  m_LocalRotation: {x: 0.3420201, y: -0, z: -0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6140495145109629827}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
---- !u!114 &472355271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 472355269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9f0e9420d652994c81f9b126e07efab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RotateSpeed: 5
 --- !u!1 &6140495145109629826
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,8 +29,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 472355270}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -91,14 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfc62d1e7c0d10469c490af69c65c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Cam: {fileID: 0}
-  m_Character: {fileID: 0}
-  m_CameraFollowTarget: {fileID: 472355271}
-  m_Horizontal: 0
-  m_Vertical: 0
-  m_MouseX: 0
-  m_PlayerMovementInput: {x: 0, y: 0, z: 0}
-  m_PlayerMouseInput: {x: 0, y: 0, z: 0}
+  _cam: {fileID: 0}
+  _character: {fileID: 0}
+  _horizontal: 0
+  _vertical: 0
+  _mouseX: 0
+  _playerMovementInput: {x: 0, y: 0, z: 0}
+  _playerMouseInput: {x: 0, y: 0, z: 0}
 --- !u!114 &-7709322769743870948
 MonoBehaviour:
   m_ObjectHideFlags: 0

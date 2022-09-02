@@ -8,9 +8,6 @@ public class LocalPlayerManager
 {
     PlayerController _playerController;
 
-    GameObject _camera;
-    CinemachineVirtualCamera _cvc;
-
     public PlayerController PlayerController 
     { 
         get { return _playerController; } 
@@ -33,18 +30,5 @@ public class LocalPlayerManager
     public Character CreateCharacter()
     {
         return Managers.Network.Instantiate("Character").GetComponent<Character>();
-    }
-
-    public void OnPossess(Character character)
-    {
-        _playerController.OnPossess(character);
-    }
-
-    public void SetCamera()
-    {
-        _camera = Camera.main.gameObject;
-        _cvc = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
-
-        _playerController.SetCamera(_camera, _cvc);
     }
 }

@@ -19,14 +19,13 @@ using Cinemachine;
 /// + https://velog.io/@minjujuu/Unity-%ED%8F%AC%ED%86%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC
 /// 
 /// </summary>
-public class PlayerController : MonoBehaviourPun, IPunObservable, IPunInstantiateMagicCallback
+public class PlayerController : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
     [SerializeField] Transform _cam;
     [SerializeField] Character _character;
 
-    [Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
-    [SerializeField] FocusedTargetByCamera _cameraFollowTarget;
+    //[Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
 
     [Header("Inputs")]
     [SerializeField] float _horizontal; // 수평. (좌우)
@@ -49,31 +48,24 @@ public class PlayerController : MonoBehaviourPun, IPunObservable, IPunInstantiat
             return;
         }
 
+        _cam = Camera.main.transform;
+
         Managers.Input.KeyAction -= CheckInput;
         Managers.Input.KeyAction += CheckInput;
     }
 
-    public void SetCamera(GameObject camera, CinemachineVirtualCamera cvc)
-    {
-        if (!photonView.IsMine)
-        {
-            return;
-        }
-
-        _cam = camera.transform;
-
-        cvc.Follow = _cameraFollowTarget.transform;
-    }
-
     public void OnPossess(Character character)
     {
-        if (photonView.IsMine) photonView.RPC("OnPossessRPC", RpcTarget.AllBuffered, character.photonView.ViewID);
+        if (photonView.IsMine)
+        {
+            photonView.RPC(nameof(OnPossessRPC), RpcTarget.AllBuffered, character.photonView.ViewID);
+        }
     }
 
     [PunRPC]
     void OnPossessRPC(int viewID)
     {
-        _character = Managers.Network.GetPhotonView(viewID).GetComponent<Character>();
+        _character = Managers.GamePlay.Characters[viewID];
     }
 
     private void Update()
@@ -109,19 +101,15 @@ public class PlayerController : MonoBehaviourPun, IPunObservable, IPunInstantiat
 
         // 캐릭터 이동.
         _character?.Move(_playerMovementInput);
-
-        // 카메라 타겟 위치를 캐릭터 위치로 옮기기.
-        _cameraFollowTarget?.Follow(_character.transform.position);
-        _cameraFollowTarget?.Rotate(_playerMouseInput);
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        throw new System.NotImplementedException();
     }
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         Managers.GamePlay.AddPlayerController(this);
+    }
+
+    private void OnDestroy()
+    {
+        //Managers.GamePlay.RemovePlayerController(this);
     }
 }

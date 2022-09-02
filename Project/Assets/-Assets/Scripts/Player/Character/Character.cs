@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviourPun
+public class Character : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
     [SerializeField] Rigidbody _rigidbody;
@@ -106,5 +106,15 @@ public class Character : MonoBehaviourPun
     private bool CanJump()
     {
         return (_onGrounded == true);
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        Managers.GamePlay.AddCharacter(this);
+    }
+
+    private void OnDestroy()
+    {
+        //Managers.SpawnedObject.RemoveCharacter(this);
     }
 }

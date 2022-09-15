@@ -1,18 +1,22 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public CameraController CurrentCamera { get { return GameObject.FindObjectOfType<CameraController>(); } }
+    CinemachineBrain _cineBrain;
 
-    void Start()
-    {
-        
+    public CameraController CurrentCamera 
+    { 
+        get 
+        { 
+            return _cineBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CameraController>(); 
+        } 
     }
 
-    void Update()
+    public void Init()
     {
-        
+        _cineBrain = GameObject.FindObjectOfType<CinemachineBrain>();
     }
 }

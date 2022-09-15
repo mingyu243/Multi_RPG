@@ -42,6 +42,7 @@ public class Managers : SingletonMono<Managers>
     {
         _network.Init();
         _localPlayer.Init();
+        _camera.Init();
     }
 
     void Update()

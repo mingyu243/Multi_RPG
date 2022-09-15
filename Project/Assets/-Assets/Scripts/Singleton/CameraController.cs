@@ -1,16 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] CinemachineVirtualCamera _cvc;
+
+    private void Awake()
+    {
+        _cvc = GetComponent<CinemachineVirtualCamera>();
+    }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         

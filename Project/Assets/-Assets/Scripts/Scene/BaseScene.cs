@@ -8,8 +8,7 @@ public abstract class BaseScene : MonoBehaviour
     [Header("Automatic Initialize")]
     public Define.Scene SceneType = Define.Scene.Unknown;
 
-    [Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
-    public CameraController 
+    //[Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
 
     private void Awake()
     {

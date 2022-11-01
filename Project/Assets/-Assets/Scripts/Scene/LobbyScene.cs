@@ -18,7 +18,9 @@ public class LobbyScene : BaseScene
         if (Managers.Network.IsConnect)
         {
             Managers.LocalPlayer.PlayerController = Managers.LocalPlayer.CreatePlayerController();
-            Managers.LocalPlayer.PlayerController.OnPossess(Managers.LocalPlayer.CreateCharacter());
+            Managers.LocalPlayer.PlayerController.Character = Managers.LocalPlayer.CreateCharacter();
+            
+            Managers.LocalPlayer.PlayerController.OnPossess(Managers.LocalPlayer.PlayerController.Character);
 
             _cvc.Follow = Managers.LocalPlayer.PlayerController.Character.transform;
         }

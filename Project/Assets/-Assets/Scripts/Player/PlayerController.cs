@@ -68,10 +68,6 @@ public class PlayerController : MonoBehaviourPun, IPunInstantiateMagicCallback
         _character = Managers.GamePlay.Characters[viewID];
     }
 
-    private void Update()
-    {
-
-    }
 
     public void CheckInput()
     {

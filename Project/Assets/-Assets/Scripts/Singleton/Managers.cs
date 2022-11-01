@@ -14,17 +14,22 @@ public class Managers : SingletonMono<Managers>
     LocalPlayerManager _localPlayer = new LocalPlayerManager();
     GamePlayManager _gamePlay = new GamePlayManager();
 
-
     [SerializeField] NetworkManager _network;
+
 
     public static DataManager Data { get { return Instance._data; } }
     public static ResourceManager Resource { get { return Instance._resource; } }
+
     public static InputManager Input { get { return Instance._input; } }
-    public static NetworkManager Network { get { return Instance._network; } }
+    public static SceneManagerEx Scene { get { return Instance._scene; } }
+
     public static CameraManager Camera { get { return Instance._camera; } }
     public static LocalPlayerManager LocalPlayer { get { return Instance._localPlayer; } }
-    public static SceneManagerEx Scene { get { return Instance._scene; } }
     public static GamePlayManager GamePlay { get { return Instance._gamePlay; } }
+
+    public static NetworkManager Network { get { return Instance._network; } }
+
+
 
     private void Awake()
     {

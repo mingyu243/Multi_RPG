@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviourPun, IPunInstantiateMagicCallback
+public class Character : MonoBehaviourPun, IPunInstantiateMagicCallback, IPunObservable
 {
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
     [SerializeField] Rigidbody _rigidbody;
@@ -116,5 +116,17 @@ public class Character : MonoBehaviourPun, IPunInstantiateMagicCallback
     private void OnDestroy()
     {
         //Managers.SpawnedObject.RemoveCharacter(this);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        //if(stream.IsWriting) // 내 데이터.
+        //{
+        //    stream.
+        //}
+        //else // 받는 데이터.
+        //{
+
+        //}
     }
 }

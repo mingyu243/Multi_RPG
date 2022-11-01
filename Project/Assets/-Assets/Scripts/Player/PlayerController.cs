@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 using Cinemachine;
 
 /// <summary>
@@ -19,7 +18,7 @@ using Cinemachine;
 /// + https://velog.io/@minjujuu/Unity-%ED%8F%AC%ED%86%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC
 /// 
 /// </summary>
-public class PlayerController : MonoBehaviourPun, IPunInstantiateMagicCallback
+public class PlayerController : MonoBehaviour /*Pun, IPunInstantiateMagicCallback*/
 {
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
     [SerializeField] Transform _cam;
@@ -43,7 +42,7 @@ public class PlayerController : MonoBehaviourPun, IPunInstantiateMagicCallback
 
     void Start()
     {
-        if (!photonView.IsMine)
+        //if (!photonView.IsMine)
         {
             return;
         }
@@ -56,13 +55,13 @@ public class PlayerController : MonoBehaviourPun, IPunInstantiateMagicCallback
 
     public void OnPossess(Character character)
     {
-        if (photonView.IsMine)
-        {
-            photonView.RPC(nameof(OnPossessRPC), RpcTarget.AllBuffered, character.photonView.ViewID);
-        }
+        //if (photonView.IsMine)
+        //{
+        //    photonView.RPC(nameof(OnPossessRPC), RpcTarget.AllBuffered, character.photonView.ViewID);
+        //}
     }
 
-    [PunRPC]
+    //[PunRPC]
     void OnPossessRPC(int viewID)
     {
         _character = Managers.GamePlay.Characters[viewID];
@@ -90,19 +89,19 @@ public class PlayerController : MonoBehaviourPun, IPunInstantiateMagicCallback
 
     private void FixedUpdate()
     {
-        if (!photonView.IsMine)
-        {
-            return;
-        }
+        //if (!photonView.IsMine)
+        //{
+        //    return;
+        //}
 
         // 캐릭터 이동.
         _character?.Move(_playerMovementInput);
     }
 
-    public void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        Managers.GamePlay.AddPlayerController(this);
-    }
+    //public void OnPhotonInstantiate(PhotonMessageInfo info)
+    //{
+    //    Managers.GamePlay.AddPlayerController(this);
+    //}
 
     private void OnDestroy()
     {

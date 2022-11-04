@@ -1,33 +1,47 @@
 using Cinemachine;
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LobbyScene : BaseScene
 {
-    [Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
-    [SerializeField] Camera _camera;
-    [SerializeField] CinemachineVirtualCamera _cvc;
-
-    protected override void Init()
+    private void Awake()
     {
-        base.Init();
-
         SceneType = Define.Scene.Lobby;
-
-        if (Managers.Network.IsConnect)
-        {
-            Managers.LocalPlayer.PlayerController = Managers.LocalPlayer.CreatePlayerController();
-            Managers.LocalPlayer.PlayerController.Character = Managers.LocalPlayer.CreateCharacter();
-            
-            Managers.LocalPlayer.PlayerController.OnPossess(Managers.LocalPlayer.PlayerController.Character);
-
-            _cvc.Follow = Managers.LocalPlayer.PlayerController.Character.transform;
-        }
     }
 
-    public override void Clear()
+    public override void Initialize(NetworkRunner runner)
     {
-        throw new System.NotImplementedException();
+        print("Initialize");
+    }
+
+    public override void Shutdown(NetworkRunner runner)
+    {
+        print("Shutdown");
+    }
+
+    public override bool IsReady(NetworkRunner runner)
+    {
+        print("IsReady");
+        SpawnInitPlayer(runner);
+
+        return true;
+    }
+
+    private void SpawnInitPlayer(NetworkRunner runner)
+    {
+        // 플레이어 컨트롤러 생성.
+        NetworkObject pcObject = Managers.Network.Spawn(runner, "PlayerController", inputAuthority: Managers.LocalPlayer.PlayerRef);
+        PlayerController pc = pcObject.GetComponent<PlayerController>();
+
+        // 캐릭터 생성.
+        NetworkObject cObject = Managers.Network.Spawn(runner, "Character");
+        Character c = cObject.GetComponent<Character>();
+
+        pc.OnPossess(c);
+
+        Managers.GamePlay.AddPlayerController(pcObject);
+        Managers.LocalPlayer.PlayerController = pc;
     }
 }

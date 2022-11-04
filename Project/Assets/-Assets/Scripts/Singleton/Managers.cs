@@ -10,10 +10,10 @@ public class Managers : SingletonMono<Managers>
     InputManager _input = new InputManager();
     SceneManagerEx _scene = new SceneManagerEx();
 
-    CameraManager _camera = new CameraManager();
     LocalPlayerManager _localPlayer = new LocalPlayerManager();
     GamePlayManager _gamePlay = new GamePlayManager();
 
+    [SerializeField] CameraManager _camera; // 코루틴 쓸려고 Monobehaviour 상속받음.
     [SerializeField] NetworkManager _network;
 
 
@@ -38,6 +38,7 @@ public class Managers : SingletonMono<Managers>
         if (Instance != null)
         {
             _network = this.gameObject.AddComponent<NetworkManager>();
+            _camera = this.gameObject.AddComponent<CameraManager>();
 
             //_data.Init();
         }
@@ -45,9 +46,7 @@ public class Managers : SingletonMono<Managers>
 
     private void Start()
     {
-        _network.Init();
-        _localPlayer.Init();
-        _camera.Init();
+        //_camera.Init();
     }
 
     void Update()

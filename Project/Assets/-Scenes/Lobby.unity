@@ -231,6 +231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 63158091}
   - component: {fileID: 63158092}
+  - component: {fileID: 63158093}
   m_Layer: 0
   m_Name: '@Scene'
   m_TagString: Untagged
@@ -265,9 +266,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6ea9a5de29ebe4f90cb823ef6ebfe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
   SceneType: 2
-  _camera: {fileID: 1435281166}
-  _cvc: {fileID: 1919320784}
+--- !u!114 &63158093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63158090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInterest: 1
+  DefaultInterestGroups: []
+  DestroyWhenStateAuthorityLeaves: 0
+  AllowStateAuthorityOverride: 1
+  AoiPositionSource: {fileID: 0}
+  Flags: 2561
+  NetworkGuid:
+    RawGuidValue: 360ac148cb734753b47551331da8f02a
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 63158092}
+  SimulationBehaviours: []
 --- !u!1 &161671748
 GameObject:
   m_ObjectHideFlags: 0
@@ -30439,6 +30463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1919320785}
   - component: {fileID: 1919320784}
+  - component: {fileID: 1919320786}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -30475,7 +30500,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6546053, y: 1}
+    m_SensorSize: {x: 1.6842105, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -30500,6 +30525,18 @@ Transform:
   m_Father: {fileID: 264348440}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1919320786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919320783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0334a9f60e7b448b3b8045a2e2c42b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2122681152
 GameObject:
   m_ObjectHideFlags: 0

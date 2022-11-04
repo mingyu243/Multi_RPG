@@ -8,7 +8,7 @@ using UnityEngine;
 public class EditorSceneInitializer : SingletonMono<EditorSceneInitializer>
 {
     public string ScenePath;
-    public string RoomName;
+    public string SessionName;
     public string NickName;
     public bool IsOffline;
 
@@ -42,7 +42,7 @@ public class EditorSceneInitializer : SingletonMono<EditorSceneInitializer>
         Debug.Log($"IsOffline : {IsOffline}");
 
         Managers.Network.SetNickName(NickName);
-        Managers.Network.JoinOrCreateRoomAsync(RoomName).Forget();
+        Managers.Network.StartGame(SessionName);
     }
 }
 

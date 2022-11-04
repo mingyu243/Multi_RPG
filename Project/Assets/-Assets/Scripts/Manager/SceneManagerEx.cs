@@ -7,6 +7,11 @@ public class SceneManagerEx
 {
     public BaseScene CurrentScene { get { return GameObject.FindObjectOfType<BaseScene>(); } }
 
+    public int GetBuildIndex(Define.Scene type)
+    {
+        return (int)type;
+    }
+
     string GetSceneName(Define.Scene type)
     {
         string name = System.Enum.GetName(typeof(Define.Scene), type); // C#ÀÇ Reflection.
@@ -21,6 +26,6 @@ public class SceneManagerEx
 
     public void Clear()
     {
-        CurrentScene.Clear();
+        //CurrentScene.Clear();
     }
 }

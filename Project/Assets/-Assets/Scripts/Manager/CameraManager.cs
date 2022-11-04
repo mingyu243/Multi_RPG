@@ -6,17 +6,50 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     CinemachineBrain _cineBrain;
-
-    public CameraController CurrentCamera 
-    { 
-        get 
-        { 
-            return _cineBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CameraController>(); 
-        } 
+    public CinemachineBrain CineBrain
+    {
+        get
+        {
+            if (_cineBrain == null)
+            {
+                //_cineBrain = GameObject.FindObjectOfType<CinemachineBrain>();
+                _cineBrain = CinemachineCore.Instance.GetActiveBrain(0);
+            }
+            return _cineBrain;
+        }
     }
 
-    public void Init()
+    CameraController _cameraController;
+    public CameraController CurrentCamera
     {
-        _cineBrain = GameObject.FindObjectOfType<CinemachineBrain>();
+        get
+        {
+            if (_cameraController == null)
+            {
+                _cameraController = CineBrain.ActiveVirtualCamera?.VirtualCameraGameObject.GetComponent<CameraController>();
+            }
+            return _cameraController;
+        }
+    }
+
+    public void SetFollowTarget(Transform transform)
+    {
+        if(CurrentCamera != null)
+        {
+            CurrentCamera.Follow(transform);
+        }
+        else
+        {
+            // 시네머신 ActiveVirtualCamera 변수는 한번의 LateUpdate 이후로 값이 설정된다.
+            // 그래서 시작하자마자 Start에서 접근하면 null이 뜬다.
+            // 해결하기 위해서 한 프레임 기다려줌.
+            StartCoroutine(Delay());
+        }
+
+        IEnumerator Delay()
+        {
+            yield return null;
+            CurrentCamera.Follow(transform);
+        }
     }
 }

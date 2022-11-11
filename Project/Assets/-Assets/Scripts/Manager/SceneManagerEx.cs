@@ -12,16 +12,10 @@ public class SceneManagerEx
         return (int)type;
     }
 
-    string GetSceneName(Define.Scene type)
-    {
-        string name = System.Enum.GetName(typeof(Define.Scene), type); // C#ÀÇ Reflection.
-        return name;
-    }
-
     public void LoadScene(Define.Scene type)
     {
         //Managers.Clear();
-        Managers.Network.LoadScene(GetSceneName(type));
+        Managers.Network.SetActiveScene(type);
     }
 
     public void Clear()

@@ -7,7 +7,7 @@ public class AnimationController : MonoBehaviour
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
     [SerializeField] Animator _animator;
 
-    void Start()
+    void Awake()
     {
         _animator = GetComponent<Animator>();
     }

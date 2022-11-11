@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Fusion;
 
 /// <summary>
 /// 
@@ -18,9 +19,9 @@ using Cinemachine;
 /// + https://velog.io/@minjujuu/Unity-%ED%8F%AC%ED%86%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC
 /// 
 /// </summary>
-public class PlayerController : MonoBehaviour /*Pun, IPunInstantiateMagicCallback*/
+public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCallback*/
 {
-    Character _character;
+    [SerializeField] Character _character;
 
     //[Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
 
@@ -40,11 +41,14 @@ public class PlayerController : MonoBehaviour /*Pun, IPunInstantiateMagicCallbac
 
     void Start()
     {
-        //Managers.Input.KeyAction -= CheckInput;
-        //Managers.Input.KeyAction += CheckInput;
+        if(Object.HasInputAuthority)
+        {
+            Managers.Input.KeyAction -= CheckInput;
+            Managers.Input.KeyAction += CheckInput;
+        }
     }
 
-    public void OnPossess(Character character)
+    public void Possess(Character character)
     {
         // 저장.
         this.Character = character;
@@ -56,32 +60,27 @@ public class PlayerController : MonoBehaviour /*Pun, IPunInstantiateMagicCallbac
 
     public void CheckInput()
     {
-        //_horizontal = Input.GetAxis("Horizontal");
-        //_vertical = Input.GetAxis("Vertical");
-        //_mouseX = Input.GetAxis("Mouse X");
+        _horizontal = Input.GetAxis("Horizontal");
+        _vertical = Input.GetAxis("Vertical");
+        _mouseX = Input.GetAxis("Mouse X");
 
-        //_playerMovementInput = (_vertical * _cam.forward) + (_horizontal * _cam.right);
-        //_playerMouseInput = new Vector2(_mouseX, 0);
+        _playerMovementInput = (_vertical * Managers.Camera.Forward) + (_horizontal * Managers.Camera.Right);
+        _playerMouseInput = new Vector2(_mouseX, 0);
 
-        //if (Input.GetKeyDown(KeyCode.LeftShift))
-        //{
-        //    _character?.PlayRoll();
-        //}
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    _character?.PlayJump();
-        //}
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _character?.PlayRoll();
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _character?.PlayJump();
+        }
     }
 
-    private void FixedUpdate()
+    public override void FixedUpdateNetwork()
     {
-        //if (!photonView.IsMine)
-        //{
-        //    return;
-        //}
-
         // 캐릭터 이동.
-        //_character?.Move(_playerMovementInput);
+        _character?.Move(_playerMovementInput);
     }
 
     //public void OnPhotonInstantiate(PhotonMessageInfo info)

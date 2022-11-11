@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6140495145109629827}
   - component: {fileID: 3953934933255900456}
   - component: {fileID: 6140495145109629837}
+  - component: {fileID: 7241611894888991360}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -54,7 +55,9 @@ MonoBehaviour:
   NetworkGuid:
     RawGuidValue: 623308a8f9915d545bc8dfdd6c77aae7
   NestedObjects: []
-  NetworkedBehaviours: []
+  NetworkedBehaviours:
+  - {fileID: 6140495145109629837}
+  - {fileID: 7241611894888991360}
   SimulationBehaviours: []
 --- !u!114 &6140495145109629837
 MonoBehaviour:
@@ -68,10 +71,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfc62d1e7c0d10469c490af69c65c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cam: {fileID: 0}
+  _interpolationDataSource: 0
   _character: {fileID: 0}
   _horizontal: 0
   _vertical: 0
   _mouseX: 0
   _playerMovementInput: {x: 0, y: 0, z: 0}
   _playerMouseInput: {x: 0, y: 0, z: 0}
+--- !u!114 &7241611894888991360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140495145109629826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c79d4923f6613f45a2f1d861e6eeec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0

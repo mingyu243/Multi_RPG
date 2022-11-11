@@ -266,8 +266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6ea9a5de29ebe4f90cb823ef6ebfe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  SceneType: 2
+  SceneType: 1
+  _playerPrefab: {fileID: 7241611894888991360, guid: 623308a8f9915d545bc8dfdd6c77aae7,
+    type: 3}
 --- !u!114 &63158093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,10 +288,9 @@ MonoBehaviour:
   AoiPositionSource: {fileID: 0}
   Flags: 2561
   NetworkGuid:
-    RawGuidValue: 360ac148cb734753b47551331da8f02a
+    RawGuidValue: 29e318d72d9c4e12950e010b0eaefa61
   NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 63158092}
+  NetworkedBehaviours: []
   SimulationBehaviours: []
 --- !u!1 &161671748
 GameObject:

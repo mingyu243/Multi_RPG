@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+    public Vector3 Forward { get { return _cineBrain.transform.forward; } }
+    public Vector3 Right { get { return _cineBrain.transform.right; } }
+
     CinemachineBrain _cineBrain;
     public CinemachineBrain CineBrain
     {
@@ -19,7 +22,7 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    CameraController _cameraController;
+    [SerializeField] CameraController _cameraController;
     public CameraController CurrentCamera
     {
         get

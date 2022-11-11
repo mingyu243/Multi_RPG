@@ -6,14 +6,8 @@ using UnityEngine;
 
 public class LocalPlayerManager
 {
-    PlayerRef _playerRef;
     PlayerController _playerController;
 
-    public PlayerRef PlayerRef
-    {
-        get { return _playerRef; }
-        set { _playerRef = value; }
-    }
     public PlayerController PlayerController 
     { 
         get { return _playerController; } 

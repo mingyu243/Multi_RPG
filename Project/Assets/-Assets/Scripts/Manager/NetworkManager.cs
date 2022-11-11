@@ -8,10 +8,16 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
+public class NetworkManager : NetworkBehaviour, INetworkRunnerCallbacks
 {
-    [SerializeField] NetworkRunner _runner;
-    
+    //PlayerRef _playerRef;
+
+    //public PlayerRef PlayerRef
+    //{
+    //    get { return _playerRef; }
+    //    set { _playerRef = value; }
+    //}
+
     public void SetNickName(string nickName)
     {
         //PhotonNetwork.LocalPlayer.NickName = nickName;
@@ -22,44 +28,39 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     }
     public async UniTask StartGameAsync(string sessionName)
     {
-        _runner = this.gameObject.AddComponent<NetworkRunner>();
-        _runner.ProvideInput = true;
-
-        await _runner.StartGame(new StartGameArgs()
+        await this.gameObject.AddComponent<NetworkRunner>().StartGame(new StartGameArgs()
         {
-            GameMode = GameMode.AutoHostOrClient,
+            GameMode = GameMode.Shared,
             SessionName = sessionName,
             Scene = Managers.Scene.GetBuildIndex(Define.Scene.Lobby)
         });
     }
-    public void LoadScene(string sceneName)
+    
+    public void SetActiveScene(Define.Scene type)
     {
-        // MasterClient만 호출해야 함.
-        // AutomaticallySyncScene = true 설정으로 이후에 들어오는 사람도 자동으로 이동함.
-        //if (PhotonNetwork.IsMasterClient)
-        //{
-        //    PhotonNetwork.LoadLevel(sceneName);
-        //}
+        Runner.SetActiveScene(Managers.Scene.GetBuildIndex(type));
     }
-    public NetworkObject Spawn(NetworkRunner networkRunner, string prefabPath, Vector3? position = null, Quaternion? rotation = null, PlayerRef? inputAuthority = null)
+
+    public NetworkObject Spawn(string prefabPath, Vector3? position = null, Quaternion? rotation = null, PlayerRef? inputAuthority = null)
     {
-        return Spawn(networkRunner, Managers.Resource.Load<GameObject>($"Prefabs/{prefabPath}"), position, rotation, inputAuthority);
+        return Spawn(Managers.Resource.Load<GameObject>($"Prefabs/{prefabPath}"), position, rotation, inputAuthority);
     }
-    public NetworkObject Spawn(NetworkRunner networkRunner, GameObject prefab, Vector3? position = null, Quaternion? rotation = null, PlayerRef? inputAuthority = null)
+    public NetworkObject Spawn(GameObject prefab, Vector3? position = null, Quaternion? rotation = null, PlayerRef? inputAuthority = null)
     {
-        return _runner.Spawn(prefab, position, rotation, inputAuthority);
+        return Runner.Spawn(prefab, position, rotation, inputAuthority);
+    }
+    public NetworkPlayer Spawn(NetworkPlayer prefab, Vector3? position = null, Quaternion? rotation = null, PlayerRef? inputAuthority = null)
+    {
+        return Runner.Spawn(prefab, position, rotation, inputAuthority);
     }
 
     #region Callbacks
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        Managers.LocalPlayer.PlayerRef = player;
-        print("OnPlayerJoined");
-
     }
+
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
-        print("OnPlayerLeft");
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
@@ -73,7 +74,6 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     }
     public void OnConnectedToServer(NetworkRunner runner)
     {
-        print("OnConnectedToServer");
     }
     public void OnDisconnectedFromServer(NetworkRunner runner)
     {

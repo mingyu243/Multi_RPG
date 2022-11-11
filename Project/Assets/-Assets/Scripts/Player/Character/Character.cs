@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using Fusion;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour /*Pun, IPunInstantiateMagicCallback, IPunObservable*/
+public class Character : NetworkBehaviour /*Pun, IPunInstantiateMagicCallback, IPunObservable*/
 {
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
     [SerializeField] Rigidbody _rigidbody;
@@ -26,11 +27,10 @@ public class Character : MonoBehaviour /*Pun, IPunInstantiateMagicCallback, IPun
     [SerializeField] bool _isRolling;
     [SerializeField] bool _onGrounded;
 
-    void Start()
+    void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-
-        _animationController = GetComponent<AnimationController>();
+        _animationController = GetComponentInChildren<AnimationController>();
     }
 
     public void PlayRoll()
@@ -53,10 +53,11 @@ public class Character : MonoBehaviour /*Pun, IPunInstantiateMagicCallback, IPun
         }
         
         _rigidbody.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
+        print($"Jump {_jumpPower} / {_rigidbody.velocity}");
         _animationController.Jump();
     }
 
-    private void Update()
+    public void Update()
     {
         _onGrounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, _checkOnGroundedLength, _checkOnGroundedLayer);
         _animationController.OnGrounded(_onGrounded);
@@ -79,7 +80,7 @@ public class Character : MonoBehaviour /*Pun, IPunInstantiateMagicCallback, IPun
             _moveXZ.Normalize();
 
             //transform.position += (m_MoveXZ * m_MoveSpeed) * m_ForwardPower * Time.deltaTime;
-            _rigidbody.MovePosition(transform.position + (_moveXZ * _moveSpeed) * _forwardPower * Time.deltaTime);
+            _rigidbody.MovePosition(transform.position + (_moveXZ * _moveSpeed) * _forwardPower * Runner.DeltaTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_moveXZ), 0.3f);
         }
     }

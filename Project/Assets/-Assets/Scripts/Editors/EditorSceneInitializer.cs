@@ -10,7 +10,6 @@ public class EditorSceneInitializer : SingletonMono<EditorSceneInitializer>
     public string ScenePath;
     public string SessionName;
     public string NickName;
-    public bool IsOffline;
 
     private void Awake()
     {
@@ -39,7 +38,6 @@ public class EditorSceneInitializer : SingletonMono<EditorSceneInitializer>
     void Start()
     {
         Debug.Log($"NickName : {NickName}");
-        Debug.Log($"IsOffline : {IsOffline}");
 
         Managers.Network.SetNickName(NickName);
         Managers.Network.StartGame(SessionName);

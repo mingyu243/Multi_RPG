@@ -165,7 +165,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44601862}
-  m_Material: {fileID: 13400000, guid: 2969bba0b0115e243b3bc0d199e63116, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -267,8 +267,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneType: 1
-  _playerPrefab: {fileID: 7241611894888991360, guid: 623308a8f9915d545bc8dfdd6c77aae7,
-    type: 3}
 --- !u!114 &63158093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +331,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161671748}
-  m_Material: {fileID: 13400000, guid: 2969bba0b0115e243b3bc0d199e63116, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -415,7 +413,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166460258}
-  m_Material: {fileID: 13400000, guid: 2969bba0b0115e243b3bc0d199e63116, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -10401,7 +10399,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465075441}
-  m_Material: {fileID: 13400000, guid: 2969bba0b0115e243b3bc0d199e63116, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -10498,7 +10496,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 486531925}
-  m_Material: {fileID: 13400000, guid: 2969bba0b0115e243b3bc0d199e63116, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -30143,7 +30141,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1239183579}
-  m_Material: {fileID: 13400000, guid: 2969bba0b0115e243b3bc0d199e63116, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -30500,7 +30498,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6842105, y: 1}
+    m_SensorSize: {x: 1.6966667, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

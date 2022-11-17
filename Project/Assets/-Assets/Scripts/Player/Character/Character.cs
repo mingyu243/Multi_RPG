@@ -18,14 +18,19 @@ public class Character : NetworkBehaviour /*Pun, IPunInstantiateMagicCallback, I
     [SerializeField] float _forwardPower;
 
     [Header("Stats")] // 능력. 
-    [SerializeField] float _moveSpeed = 7;
-    [SerializeField] float _jumpPower = 12;
-    [SerializeField] float _rollPower = 12;
+    [SerializeField] float _moveSpeed = 7f;
+    [SerializeField] float _startJumpPower = 5f; // 기본 점프.
+    [SerializeField] float _keepJumpPowerMax = 10f; // 점프 힘의 최대.
+    [SerializeField] float _keepJumpTime = 0.5f;
+    [SerializeField] float _rollPower = 12f;
     [SerializeField] float _checkOnGroundedLength = 0.3f;
 
     [Header("States")] // 상태.
     [SerializeField] bool _isRolling;
     [SerializeField] bool _onGrounded;
+    [SerializeField] bool _canKeepJump;
+    [SerializeField] float _currKeepJumpTime = 0f;
+    [SerializeField] float _currJumpPower = 0f;
 
     void Awake()
     {
@@ -45,17 +50,45 @@ public class Character : NetworkBehaviour /*Pun, IPunInstantiateMagicCallback, I
         _rigidbody.AddForce(transform.forward * _rollPower + Vector3.up * -Physics.gravity.y, ForceMode.Impulse);
         _animationController.Roll();
     }
+
     public void PlayJump()
-    {
+{
         if (!CanJump())
         {
             return;
         }
-        
-        _rigidbody.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
-        print($"Jump {_jumpPower} / {_rigidbody.velocity}");
+
+        _canKeepJump = true;
+        _currKeepJumpTime = 0.0f;
+        _currJumpPower = _startJumpPower;
         _animationController.Jump();
     }
+
+    public void KeepJumping()
+    {
+        if (!_canKeepJump)
+        {
+            return;
+        }
+        if (_currKeepJumpTime > _keepJumpTime) // 시간 다 되면 끝.
+        {
+            _rigidbody.velocity = Vector3.up * _keepJumpPowerMax; // 마지막 끝 힘까지 넣어줌.
+
+            _canKeepJump = false;
+            return;
+        }
+
+        _currKeepJumpTime += Time.deltaTime;
+        _currJumpPower = Mathf.Lerp(_startJumpPower, _keepJumpPowerMax, _currKeepJumpTime / _keepJumpTime); // 시간에 비례해 min ~ max 힘을 넣어줌.
+
+        //_rigidbody.AddForce(, ForceMode.Impulse);
+        _rigidbody.velocity = Vector3.up * _currJumpPower;
+    }
+    public void StopJumping()
+    {
+        _canKeepJump = false;
+    }
+
 
     public void Update()
     {

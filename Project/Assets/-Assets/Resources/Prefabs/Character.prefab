@@ -958,11 +958,16 @@ MonoBehaviour:
   _moveXZ: {x: 0, y: 0, z: 0}
   _forwardPower: 0
   _moveSpeed: 7
-  _jumpPower: 12
+  _startJumpPower: 7
+  _keepJumpPowerMax: 10
+  _keepJumpTime: 0.2
   _rollPower: 12
   _checkOnGroundedLength: 0.3
   _isRolling: 0
   _onGrounded: 0
+  _canKeepJump: 0
+  _currKeepJumpTime: 0
+  _currJumpPower: 0
 --- !u!1 &4080802878897304226
 GameObject:
   m_ObjectHideFlags: 0

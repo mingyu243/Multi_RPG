@@ -41,7 +41,7 @@ public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCall
 
     void Start()
     {
-        if(Object.HasInputAuthority)
+        if (Object.HasInputAuthority)
         {
             Managers.Input.KeyAction -= CheckInput;
             Managers.Input.KeyAction += CheckInput;
@@ -71,10 +71,23 @@ public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCall
         {
             _character?.PlayRoll();
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (Input.GetKey(KeyCode.Space))
         {
-            _character?.PlayJump();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _character?.PlayJump();
+            }
+            else
+            {
+                _character?.KeepJumping();
+            }
         }
+        if(Input.GetKeyUp(KeyCode.Space))
+        {
+            _character?.StopJumping();
+        }
+
     }
 
     public override void FixedUpdateNetwork()

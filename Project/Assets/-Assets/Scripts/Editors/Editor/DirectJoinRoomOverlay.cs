@@ -89,7 +89,7 @@ public class DirectJoinRoomOverlay : Overlay
         EditorUtility.SetDirty(go);
 
         EditorSceneInitializer.Instance.ScenePath = scenePath; 
-        EditorSceneInitializer.Instance.NickName = EditorPrefs.GetString(EDITOR_KEY_NICK_NAME, string.Empty);
+        EditorSceneInitializer.Instance.Nickname = EditorPrefs.GetString(EDITOR_KEY_NICK_NAME, string.Empty);
         EditorSceneInitializer.Instance.SessionName = EditorPrefs.GetString(EDITOR_KEY_ROOM_NAME, string.Empty);
 
         EditorApplication.EnterPlaymode();

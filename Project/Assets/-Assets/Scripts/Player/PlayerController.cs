@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
@@ -21,8 +21,6 @@ using Fusion;
 /// </summary>
 public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCallback*/
 {
-    [SerializeField] Character _character;
-
     //[Header("Manual Initialize")] // 인스펙터에서 수동으로 초기화.
 
     [Header("Inputs")]
@@ -33,11 +31,10 @@ public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCall
     [SerializeField] Vector3 _playerMovementInput;
     [SerializeField] Vector3 _playerMouseInput;
 
-    public Character Character
-    {
-        get { return _character; }
-        set { _character = value; }
-    }
+    [Networked(OnChanged = nameof(OnChangedNickname))] public string Nickname { get; set; }
+    public static void OnChangedNickname(Changed<PlayerController> changed) => print($"{changed.Behaviour.Nickname}(으)로 닉네임이 바뀌었습니다.");
+    [Networked(OnChanged = nameof(OnChangedCharacter))] public Character Character { get; set; }
+    public static void OnChangedCharacter(Changed<PlayerController> changed) => print($"캐릭터가 바뀌었습니다.");
 
     void Start()
     {
@@ -45,6 +42,8 @@ public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCall
         {
             Managers.Input.KeyAction -= CheckInput;
             Managers.Input.KeyAction += CheckInput;
+            
+            Managers.UI.ShowSceneUI<UI_GamePlay>();
         }
     }
 
@@ -60,6 +59,7 @@ public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCall
 
     public void CheckInput()
     {
+
         _horizontal = Input.GetAxis("Horizontal");
         _vertical = Input.GetAxis("Vertical");
         _mouseX = Input.GetAxis("Mouse X");
@@ -69,37 +69,48 @@ public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCall
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            _character?.PlayRoll();
+            Character?.PlayRoll();
         }
 
         if (Input.GetKey(KeyCode.Space))
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _character?.PlayJump();
+                Character?.PlayJump();
             }
             else
             {
-                _character?.KeepJumping();
+                Character?.KeepJumping();
             }
         }
-        if(Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            _character?.StopJumping();
+            Character?.StopJumping();
         }
-
     }
 
     public override void FixedUpdateNetwork()
     {
         // 캐릭터 이동.
-        _character?.Move(_playerMovementInput);
+        Character?.Move(_playerMovementInput);
     }
 
-    //public void OnPhotonInstantiate(PhotonMessageInfo info)
-    //{
-    //    Managers.GamePlay.AddPlayerController(this);
-    //}
+    public void SendChatMessage(string message)
+    {
+        RPC_SendChatMessage(message);
+    }
+    /// <summary>
+    /// [참고] https://doc.photonengine.com/ko-kr/fusion/current/fusion-100/fusion-106
+    /// </summary>
+    [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
+    public void RPC_SendChatMessage(string message)
+    {
+        UI_GamePlay uI_GamePlay = Managers.UI.SceneUI as UI_GamePlay;
+        if (uI_GamePlay != null)
+        {
+            uI_GamePlay.AddChatMessage(Nickname, message);
+        }
+    }
 
     private void OnDestroy()
     {

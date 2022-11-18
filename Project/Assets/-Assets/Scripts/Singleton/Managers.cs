@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +9,7 @@ public class Managers : SingletonMono<Managers>
     
     InputManager _input = new InputManager();
     SceneManagerEx _scene = new SceneManagerEx();
+    UIManager _ui = new UIManager();
 
     LocalPlayerManager _localPlayer = new LocalPlayerManager();
     GamePlayManager _gamePlay = new GamePlayManager();
@@ -22,6 +23,7 @@ public class Managers : SingletonMono<Managers>
 
     public static InputManager Input { get { return Instance._input; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }
+    public static UIManager UI { get { return Instance._ui; } }
 
     public static CameraManager Camera { get { return Instance._camera; } }
     public static LocalPlayerManager LocalPlayer { get { return Instance._localPlayer; } }

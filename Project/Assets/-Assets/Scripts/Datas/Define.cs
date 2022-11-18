@@ -11,4 +11,16 @@ public class Define
         Lobby = 1,
         Game = 2
     }
+
+    public enum UIEvent
+    {
+        Click,
+        Drag,
+    }
+
+    public enum MouseEvent
+    {
+        Press,
+        Click,
+    }
 }

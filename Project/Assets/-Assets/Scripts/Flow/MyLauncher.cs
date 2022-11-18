@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +13,7 @@ public class MyLauncher : MonoBehaviour
 
     public void JoinOrCreateRoom() // button event.
     {
-        Managers.Network.SetNickName(_nickName.text);
+        Managers.LocalPlayer.InputNickname = _nickName.text;
         Managers.Network.StartGame(_sessionName.text);
     }
 }

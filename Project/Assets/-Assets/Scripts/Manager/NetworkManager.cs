@@ -1,4 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Fusion;
 using Fusion.Sockets;
 using System;
@@ -64,7 +64,7 @@ public class NetworkManager : NetworkBehaviour, INetworkRunnerCallbacks
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
-        Managers.Input.OnUpdate();
+        //Managers.Input.OnUpdate();
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
     {

@@ -17,11 +17,12 @@ public class LobbyScene : BaseScene, INetworkRunnerCallbacks
     {
         print("LobbyScene Start : Spawned Character & Possess");
 
-        // ÇÃ·¹ÀÌ¾î ÄÁÆ®·Ñ·¯ »ı¼º.
+        // í”Œë ˆì´ì–´ ì»¨íŠ¸ë¡¤ëŸ¬ ìƒì„±.
         NetworkObject pcObject = Managers.Network.Spawn("PlayerController", inputAuthority: Managers.Network.Runner.LocalPlayer);
         PlayerController pc = pcObject.gameObject.GetComponent<PlayerController>();
+        pc.Nickname = Managers.LocalPlayer.InputNickname;
 
-        // Ä³¸¯ÅÍ »ı¼º.
+        // ìºë¦­í„° ìƒì„±.
         NetworkObject cObject = Managers.Network.Spawn("Character", inputAuthority: Managers.Network.Runner.LocalPlayer);
         Character c = cObject.gameObject.GetComponent<Character>();
 

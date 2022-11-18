@@ -1,4 +1,4 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 
 using Cysharp.Threading.Tasks;
 using UnityEditor;
@@ -9,7 +9,7 @@ public class EditorSceneInitializer : SingletonMono<EditorSceneInitializer>
 {
     public string ScenePath;
     public string SessionName;
-    public string NickName;
+    public string Nickname;
 
     private void Awake()
     {
@@ -37,9 +37,9 @@ public class EditorSceneInitializer : SingletonMono<EditorSceneInitializer>
 
     void Start()
     {
-        Debug.Log($"NickName : {NickName}");
+        Debug.Log($"NickName : {Nickname}");
 
-        Managers.Network.SetNickName(NickName);
+        Managers.LocalPlayer.InputNickname = Nickname;
         Managers.Network.StartGame(SessionName);
     }
 }

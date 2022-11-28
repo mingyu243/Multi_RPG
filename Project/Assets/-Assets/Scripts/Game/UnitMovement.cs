@@ -1,9 +1,17 @@
-﻿using Fusion;
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : NetworkBehaviour /*Pun, IPunInstantiateMagicCallback, IPunObservable*/
+public interface IMovable
+{
+    public void Move(Vector3 inputMove);
+    public void PlayJump();
+    public void KeepJumping();
+    public void StopJump();
+}
+
+public class UnitMovement : NetworkBehaviour
 {
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
     [SerializeField] Rigidbody _rigidbody;
@@ -19,11 +27,11 @@ public class Character : NetworkBehaviour /*Pun, IPunInstantiateMagicCallback, I
 
     [Header("Stats")] // 능력. 
     [SerializeField] float _moveSpeed = 7f;
-    [SerializeField] float _startJumpPower = 5f; // 기본 점프.
+    [SerializeField] float _startJumpPower = 7f; // 기본 점프.
     [SerializeField] float _keepJumpPowerMax = 10f; // 점프 힘의 최대.
-    [SerializeField] float _keepJumpTime = 0.5f;
+    [SerializeField] float _keepJumpTime = 0.15f;
     [SerializeField] float _rollPower = 12f;
-    [SerializeField] float _checkOnGroundedLength = 0.3f;
+    [SerializeField] float _checkOnGroundedLength = 0.1f;
 
     [Header("States")] // 상태.
     [SerializeField] bool _isRolling;
@@ -40,7 +48,7 @@ public class Character : NetworkBehaviour /*Pun, IPunInstantiateMagicCallback, I
 
     public void PlayRoll()
     {
-        if(!CanRoll())
+        if (!CanRoll())
         {
             return;
         }
@@ -52,7 +60,7 @@ public class Character : NetworkBehaviour /*Pun, IPunInstantiateMagicCallback, I
     }
 
     public void PlayJump()
-{
+    {
         if (!CanJump())
         {
             return;
@@ -84,7 +92,7 @@ public class Character : NetworkBehaviour /*Pun, IPunInstantiateMagicCallback, I
         //_rigidbody.AddForce(, ForceMode.Impulse);
         _rigidbody.velocity = Vector3.up * _currJumpPower;
     }
-    public void StopJumping()
+    public void StopJump()
     {
         _canKeepJump = false;
     }
@@ -141,25 +149,4 @@ public class Character : NetworkBehaviour /*Pun, IPunInstantiateMagicCallback, I
         return (_onGrounded == true);
     }
 
-    //public void OnPhotonInstantiate(PhotonMessageInfo info)
-    //{
-    //    Managers.GamePlay.AddCharacter(this);
-    //}
-
-    //private void OnDestroy()
-    //{
-    //    //Managers.SpawnedObject.RemoveCharacter(this);
-    //}
-
-    //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    //{
-    //    //if(stream.IsWriting) // 내 데이터.
-    //    //{
-    //    //    stream.
-    //    //}
-    //    //else // 받는 데이터.
-    //    //{
-
-    //    //}
-    //}
 }

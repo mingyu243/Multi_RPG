@@ -15,7 +15,7 @@ public class LobbyScene : BaseScene, INetworkRunnerCallbacks
 
     private void Start()
     {
-        print("LobbyScene Start : Spawned Character & Possess");
+        print("LobbyScene Start : Spawned Unit & Possess");
 
         // 플레이어 컨트롤러 생성.
         NetworkObject pcObject = Managers.Network.Spawn("PlayerController", inputAuthority: Managers.Network.Runner.LocalPlayer);
@@ -24,7 +24,7 @@ public class LobbyScene : BaseScene, INetworkRunnerCallbacks
 
         // 캐릭터 생성.
         NetworkObject cObject = Managers.Network.Spawn("Character", inputAuthority: Managers.Network.Runner.LocalPlayer);
-        Character c = cObject.gameObject.GetComponent<Character>();
+        Unit c = cObject.gameObject.GetComponent<Unit>();
 
         pc.Possess(c);
 

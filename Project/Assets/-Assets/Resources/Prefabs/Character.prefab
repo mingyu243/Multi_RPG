@@ -843,6 +843,7 @@ GameObject:
   - component: {fileID: 4080802877993245904}
   - component: {fileID: 6449086035187427134}
   - component: {fileID: -6750445381339666167}
+  - component: {fileID: 4751495430166062411}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -892,6 +893,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 6449086035187427134}
   - {fileID: -6750445381339666167}
+  - {fileID: 4751495430166062411}
   - {fileID: 6327736215305267415}
   SimulationBehaviours: []
 --- !u!54 &4080802877993245904
@@ -949,6 +951,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+--- !u!114 &4751495430166062411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4080802877993245907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2ae0c252e6526489b7d782ac9292af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
   _rigidbody: {fileID: 0}
   _animationController: {fileID: 0}
   _checkOnGroundedLayer:
@@ -960,9 +975,9 @@ MonoBehaviour:
   _moveSpeed: 7
   _startJumpPower: 7
   _keepJumpPowerMax: 10
-  _keepJumpTime: 0.2
+  _keepJumpTime: 0.15
   _rollPower: 12
-  _checkOnGroundedLength: 0.3
+  _checkOnGroundedLength: 0.1
   _isRolling: 0
   _onGrounded: 0
   _canKeepJump: 0

@@ -33,7 +33,7 @@ public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCall
 
     [Networked(OnChanged = nameof(OnChangedNickname))] public string Nickname { get; set; }
     public static void OnChangedNickname(Changed<PlayerController> changed) => print($"{changed.Behaviour.Nickname}(으)로 닉네임이 바뀌었습니다.");
-    [Networked(OnChanged = nameof(OnChangedCharacter))] public Character Character { get; set; }
+    [Networked(OnChanged = nameof(OnChangedCharacter))] public Unit Character { get; set; }
     public static void OnChangedCharacter(Changed<PlayerController> changed) => print($"캐릭터가 바뀌었습니다.");
 
     void Start()
@@ -47,7 +47,7 @@ public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCall
         }
     }
 
-    public void Possess(Character character)
+    public void Possess(Unit character)
     {
         // 저장.
         this.Character = character;
@@ -69,7 +69,7 @@ public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCall
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            Character?.PlayRoll();
+            //Character?.PlayRoll();
         }
 
         if (Input.GetKey(KeyCode.Space))
@@ -85,7 +85,7 @@ public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCall
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            Character?.StopJumping();
+            Character?.StopJump();
         }
     }
 

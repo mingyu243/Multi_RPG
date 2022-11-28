@@ -11,7 +11,7 @@ public interface IMovable
     public void StopJump();
 }
 
-public class UnitMovement : NetworkBehaviour
+public class MoveController : NetworkBehaviour
 {
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
     [SerializeField] Rigidbody _rigidbody;

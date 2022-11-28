@@ -7,31 +7,31 @@ using UnityEngine;
 public class Unit : NetworkBehaviour, IMovable
 {
     [Header("Automatic Initialize")] // 스크립트에서 자동으로 초기화.
-    [SerializeField] UnitMovement _unitMovement;
+    [SerializeField] MoveController _moveController;
 
     void Awake()
     {
-        _unitMovement = GetComponent<UnitMovement>();
+        _moveController = GetComponent<MoveController>();
     }
 
     public void KeepJumping()
     {
-        _unitMovement.KeepJumping();
+        _moveController.KeepJumping();
     }
 
     public void Move(Vector3 inputMove)
     {
-        _unitMovement.Move(inputMove);
+        _moveController.Move(inputMove);
     }
 
     public void PlayJump()
     {
-        _unitMovement.PlayJump();
+        _moveController.PlayJump();
     }
 
     public void StopJump()
     {
-        _unitMovement.StopJump();
+        _moveController.StopJump();
     }
 
 

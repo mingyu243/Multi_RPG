@@ -951,6 +951,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  _moveController: {fileID: 0}
+  _combatController: {fileID: 0}
 --- !u!114 &4751495430166062411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,7 +979,7 @@ MonoBehaviour:
   _keepJumpPowerMax: 10
   _keepJumpTime: 0.15
   _rollPower: 12
-  _checkOnGroundedLength: 0.1
+  _checkOnGroundedLength: 0.2
   _isRolling: 0
   _onGrounded: 0
   _canKeepJump: 0

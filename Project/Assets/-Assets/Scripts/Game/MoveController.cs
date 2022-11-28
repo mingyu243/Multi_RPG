@@ -31,7 +31,7 @@ public class MoveController : NetworkBehaviour
     [SerializeField] float _keepJumpPowerMax = 10f; // 점프 힘의 최대.
     [SerializeField] float _keepJumpTime = 0.15f;
     [SerializeField] float _rollPower = 12f;
-    [SerializeField] float _checkOnGroundedLength = 0.1f;
+    [SerializeField] float _checkOnGroundedLength = 0.2f;
 
     [Header("States")] // 상태.
     [SerializeField] bool _isRolling;

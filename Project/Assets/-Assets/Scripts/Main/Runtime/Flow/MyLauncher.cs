@@ -13,7 +13,7 @@ public class MyLauncher : MonoBehaviour
 
     public void JoinOrCreateRoom() // button event.
     {
-        Managers.LocalPlayer.InputNickname = _nickName.text;
+        Managers.GamePlay.StartNickName = _nickName.text;
         Managers.Network.StartGame(_sessionName.text);
     }
 }

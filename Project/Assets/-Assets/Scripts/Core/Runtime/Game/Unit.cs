@@ -35,11 +35,4 @@ public class Unit : NetworkBehaviour, IMovable
     {
         _moveController.StopJump();
     }
-
-
-
-
-
-
-
 }

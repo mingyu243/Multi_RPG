@@ -1,11 +1,6 @@
-using ExitGames.Client.Photon;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class UI_Chat : UI_Base
 {
@@ -19,22 +14,20 @@ public class UI_Chat : UI_Base
         ChatInputField,
     }
 
-    TMP_Text _chatLog;
-    TMP_InputField _chatInputField;
+    TMP_Text ChatLog => Get<TMP_Text>((int)Texts.ChatLog);
+    TMP_InputField ChatInputField => Get<TMP_InputField>((int)InputFields.ChatInputField);
+
+    PlayerChat Chat => Managers.GamePlay.LocalPlayer.Chat;
 
     public override void Init()
     {
         Bind<TMP_Text>(typeof(Texts));
         Bind<TMP_InputField>(typeof(InputFields));
 
-        _chatLog = Get<TMP_Text>((int)Texts.ChatLog);
-        _chatLog.text = string.Empty;
+        ChatLog.text = string.Empty;
 
-        _chatInputField = Get<TMP_InputField>((int)InputFields.ChatInputField);
-        _chatInputField.onSubmit.RemoveListener(SendInputMessage);
-        _chatInputField.onSubmit.AddListener(SendInputMessage);
-        //_chatInputField.onSelect.AddListener((s)=>print("onSelect"));
-        //_chatInputField.onDeselect.AddListener((s) => print("onDeselect"));
+        ChatInputField.onSubmit.RemoveListener(SendInputMessage);
+        ChatInputField.onSubmit.AddListener(SendInputMessage);
 
         Managers.Input.KeyAction -= CheckInput;
         Managers.Input.KeyAction += CheckInput;
@@ -55,13 +48,13 @@ public class UI_Chat : UI_Base
 
     private void ToggleInputField()
     {
-        if(EventSystem.current.currentSelectedGameObject == _chatInputField.gameObject)
+        if(EventSystem.current.currentSelectedGameObject == ChatInputField.gameObject)
         {
             EventSystem.current.SetSelectedGameObject(null);
         }
         else
         {
-            _chatInputField.ActivateInputField();
+            ChatInputField.ActivateInputField();
         }
     }
 
@@ -69,13 +62,13 @@ public class UI_Chat : UI_Base
     {
         if (inputMessage != string.Empty)
         {
-            Managers.LocalPlayer.PlayerController.SendChatMessage(inputMessage);
-            _chatInputField.text = string.Empty;
+            Chat.Chat(inputMessage);
+            ChatInputField.text = string.Empty;
         }
     }
 
     public void AddMessage(string nickname, string message)
     {
-        _chatLog.text += $"{nickname} : {message}\n";
+        ChatLog.text += $"{nickname} : {message}\n";
     }
 }

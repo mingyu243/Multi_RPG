@@ -18,17 +18,18 @@ public class LobbyScene : BaseScene, INetworkRunnerCallbacks
         print("LobbyScene Start : Spawned Unit & Possess");
 
         // 플레이어 컨트롤러 생성.
-        NetworkObject pcObject = Managers.Network.Spawn("PlayerController", inputAuthority: Managers.Network.Runner.LocalPlayer);
-        PlayerController pc = pcObject.gameObject.GetComponent<PlayerController>();
-        pc.Nickname = Managers.LocalPlayer.InputNickname;
+        NetworkObject pcObject = Managers.Network.Spawn("Player", inputAuthority: Managers.Network.Runner.LocalPlayer);
+        Player player = pcObject.gameObject.GetComponent<Player>();
 
         // 캐릭터 생성.
         NetworkObject cObject = Managers.Network.Spawn("Character", inputAuthority: Managers.Network.Runner.LocalPlayer);
         Unit c = cObject.gameObject.GetComponent<Unit>();
 
-        pc.Possess(c);
+        player.Controller.Possess(c);
 
-        Managers.LocalPlayer.PlayerController = pc;
+        // 로그인할 때 저장해두었던 닉네임 세팅.
+        player.Profile.Name = Managers.GamePlay.StartNickName;
+        Managers.GamePlay.LocalPlayer = player;
     }
 
     public void OnConnectedToServer(NetworkRunner runner) { }

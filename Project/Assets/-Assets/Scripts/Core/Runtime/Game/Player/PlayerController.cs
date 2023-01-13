@@ -59,7 +59,6 @@ public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCall
 
     public void CheckInput()
     {
-
         _horizontal = Input.GetAxis("Horizontal");
         _vertical = Input.GetAxis("Vertical");
         _mouseX = Input.GetAxis("Mouse X");
@@ -93,23 +92,6 @@ public class PlayerController : NetworkBehaviour /*Pun, IPunInstantiateMagicCall
     {
         // 캐릭터 이동.
         Character?.Move(_playerMovementInput);
-    }
-
-    public void SendChatMessage(string message)
-    {
-        RPC_SendChatMessage(message);
-    }
-    /// <summary>
-    /// [참고] https://doc.photonengine.com/ko-kr/fusion/current/fusion-100/fusion-106
-    /// </summary>
-    [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
-    public void RPC_SendChatMessage(string message)
-    {
-        UI_GamePlay uI_GamePlay = Managers.UI.SceneUI as UI_GamePlay;
-        if (uI_GamePlay != null)
-        {
-            uI_GamePlay.AddChatMessage(Nickname, message);
-        }
     }
 
     private void OnDestroy()

@@ -10,6 +10,9 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManager : NetworkBehaviour, INetworkRunnerCallbacks
 {
+    IRoom room;
+
+
     //PlayerRef _playerRef;
 
     //public PlayerRef PlayerRef
@@ -49,7 +52,7 @@ public class NetworkManager : NetworkBehaviour, INetworkRunnerCallbacks
     {
         return Runner.Spawn(prefab, position, rotation, inputAuthority);
     }
-    public NetworkPlayer Spawn(NetworkPlayer prefab, Vector3? position = null, Quaternion? rotation = null, PlayerRef? inputAuthority = null)
+    public Player Spawn(Player prefab, Vector3? position = null, Quaternion? rotation = null, PlayerRef? inputAuthority = null)
     {
         return Runner.Spawn(prefab, position, rotation, inputAuthority);
     }

@@ -25,7 +25,7 @@ public class MoveController : NetworkBehaviour
     [SerializeField] Vector3 _moveXZ;
     [SerializeField] float _forwardPower;
 
-    [Header("Stats")] // 능력. 
+    [Header("Stats")] // 능력.
     [SerializeField] float _moveSpeed = 7f;
     [SerializeField] float _startJumpPower = 7f; // 기본 점프.
     [SerializeField] float _keepJumpPowerMax = 10f; // 점프 힘의 최대.

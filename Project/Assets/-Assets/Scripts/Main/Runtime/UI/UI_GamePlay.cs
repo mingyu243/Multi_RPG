@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UI_GamePlay : UI_Scene
@@ -9,6 +10,7 @@ public class UI_GamePlay : UI_Scene
         UI_Chat,
     }
 
+    UI_Chat UI_Chat => Get<UI_Chat>((int)GameObjects.UI_Chat);
 
     private void Start()
     {
@@ -24,6 +26,6 @@ public class UI_GamePlay : UI_Scene
 
     public void AddChatMessage(string nickname, string message)
     {
-        Get<UI_Chat>((int)GameObjects.UI_Chat).AddMessage(nickname, message);
+        UI_Chat.AddMessage(nickname, message);
     }
 }

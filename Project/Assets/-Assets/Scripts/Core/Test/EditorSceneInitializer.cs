@@ -39,7 +39,7 @@ public class EditorSceneInitializer : SingletonMono<EditorSceneInitializer>
     {
         Debug.Log($"NickName : {Nickname}");
 
-        Managers.LocalPlayer.InputNickname = Nickname;
+        Managers.GamePlay.StartNickName = Nickname;
         Managers.Network.StartGame(SessionName);
     }
 }
